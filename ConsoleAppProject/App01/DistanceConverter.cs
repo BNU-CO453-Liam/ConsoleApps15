@@ -21,9 +21,25 @@ namespace ConsoleAppProject.App01
         /// </author>
         public void Run()
         {
+            OutputHeading();
             InputMiles();
             CalculateFeet();
             OutputFeet();
+        }
+        /// <summary>
+        /// Displays a heading to the user
+        /// </summary>
+        /// /// <author>
+        /// Liam Smith version 0.1
+        /// </author>
+        private void OutputHeading()
+        {
+            Console.WriteLine();
+            Console.WriteLine(" -----------------------------");
+            Console.WriteLine("     Convert Miles to Feet    ");
+            Console.WriteLine("         by Liam Smith        ");
+            Console.WriteLine(" -----------------------------");
+            Console.WriteLine();
         }
 
         /// <summary>
@@ -49,7 +65,7 @@ namespace ConsoleAppProject.App01
         /// </author>
         private void CalculateFeet()
         {
-
+            feet = miles * 5280;
         }
 
         /// <summary>
@@ -60,7 +76,7 @@ namespace ConsoleAppProject.App01
         /// </author>
         private void OutputFeet()
         {
-
+            Console.WriteLine(miles + " miles is " + feet + " feet!");
         }
     }
 }
