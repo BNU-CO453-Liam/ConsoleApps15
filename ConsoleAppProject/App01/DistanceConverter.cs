@@ -13,6 +13,7 @@ namespace ConsoleAppProject.App01
         private double miles;
         private double feet;
         private double metres;
+        private string input_unit;
 
 
         /// <summary>
@@ -24,15 +25,8 @@ namespace ConsoleAppProject.App01
         public void Run()
         {
             OutputHeading();
-            InputMiles();
-            CalculateFeet();
-            OutputFeet();
-            InputFeet();
-            CalculateMiles();
-            OutputMiles();
-            InputMiles();
-            CalculateMetres();
-            OutputMetres();
+            ConvertFrom();
+            
         }
         /// <summary>
         /// Displays a heading to the user
@@ -52,26 +46,42 @@ namespace ConsoleAppProject.App01
 
         /// <summary>
         /// Promt the user to select a unit of distance to convert from
+        /// uses an if statement to check for conditions
         /// </summary>
         /// /// <author>
         /// Liam Smith version 0.4
         /// </author>
         private void ConvertFrom()
         {
-            Console.Write("Select unit to convert from> ");
-            string value = Console.ReadLine();
-            miles = Convert.ToDouble(value);
-            metres = Convert.ToDouble(value);
+            Console.Write("Select unit to convert from> \n\n");
+            Console.Write("1. Feet\n2. Metres\n3. Miles\n\nPlease enter your choice > ");
+            string input_unit = Console.ReadLine();
+            if (input_unit == "1")
+            {
+                Console.WriteLine("You have selected Feet");
+            }
+                else if (input_unit == "2")
+                    {
+                        Console.WriteLine("You have selected Metres");
+                    }
+                else if (input_unit == "3")
+                    {
+                        Console.WriteLine("You have selected Miles");
+                    }
+            
         }
 
-        /// <summary>
-        /// Promt the user to enter the distance in miles
-        /// Input the miles in a double number
-        /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.3
-        /// </author>
-        private void InputMiles()
+
+
+
+    /// <summary>
+    /// Promt the user to enter the distance in miles
+    /// Input the miles in a double number
+    /// </summary>
+    /// /// <author>
+    /// Liam Smith version 0.3
+    /// </author>
+    private void InputMiles()
         {
             Console.Write("Please enter the number of miles> ");
             string value = Console.ReadLine();
