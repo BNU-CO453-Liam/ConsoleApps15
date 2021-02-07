@@ -2,7 +2,7 @@
 namespace ConsoleAppProject.App01
 {
     /// <summary>
-    /// An App to convert miles to feet
+    /// An App to convert miles to feet and feet to miles
     /// </summary>
     /// <author>
     /// Liam Smith version 0.1
@@ -38,6 +38,7 @@ namespace ConsoleAppProject.App01
             Console.WriteLine();
             Console.WriteLine("\n-----------------------------");
             Console.WriteLine("     Convert Miles to Feet    ");
+            Console.WriteLine("       and Feet to Miles        ");
             Console.WriteLine("         by Liam Smith        ");
             Console.WriteLine("-----------------------------\n");
             Console.WriteLine();
