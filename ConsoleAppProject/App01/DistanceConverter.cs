@@ -15,10 +15,10 @@ namespace ConsoleAppProject.App01
 
 
         /// <summary>
-        /// 
+        /// Calls all methods to be run in order
         /// </summary>
         /// /// <author>
-        /// Liam Smith version 0.1
+        /// Liam Smith version 0.2
         /// </author>
         public void Run()
         {
@@ -26,6 +26,9 @@ namespace ConsoleAppProject.App01
             InputMiles();
             CalculateFeet();
             OutputFeet();
+            InputFeet();
+            CalculateMiles();
+            OutputMiles();
         }
         /// <summary>
         /// Displays a heading to the user
@@ -79,6 +82,19 @@ namespace ConsoleAppProject.App01
         private void OutputFeet()
         {
             Console.WriteLine(miles + " miles is " + feet + " feet!");
+        }
+
+        /// <summary>
+        /// Promts the user for an input in feet
+        /// </summary>
+        /// /// <author>
+        /// Liam Smith version 0.2
+        /// </author>
+        private void InputFeet()
+        {
+            Console.Write("Please enter the number of feet > ");
+            string value = Console.ReadLine();
+            feet = Convert.ToDouble(value);
         }
 
         /// <summary>
