@@ -14,6 +14,9 @@ namespace ConsoleAppProject.App01
         private double feet;
         private double metres;
         private string input_unit;
+        private string output_unit;
+        public string input_string;
+        public string output_string;
 
 
         /// <summary>
@@ -26,6 +29,7 @@ namespace ConsoleAppProject.App01
         {
             OutputHeading();
             ConvertFrom();
+            ConvertTo();
             
         }
         /// <summary>
@@ -58,30 +62,61 @@ namespace ConsoleAppProject.App01
             string input_unit = Console.ReadLine();
             if (input_unit == "1")
             {
-                Console.WriteLine("You have selected Feet");
+                Console.WriteLine("\nYou have selected Feet");
+                input_string = "Feet";
             }
-                else if (input_unit == "2")
-                    {
-                        Console.WriteLine("You have selected Metres");
-                    }
-                else if (input_unit == "3")
-                    {
-                        Console.WriteLine("You have selected Miles");
-                    }
+            else if (input_unit == "2")
+            {
+                Console.WriteLine("\nYou have selected Metres");
+                input_string = "Metres";
+            }
+            else if (input_unit == "3")
+            {
+                Console.WriteLine("\nYou have selected Miles");
+                input_string = "Miles";
+            }
             
+        }
+
+        public void ConvertTo()
+        {
+            Console.Write("\nSelect unit to convert to> \n\n");
+            Console.Write("1. Feet\n2. Metres\n3. Miles\n\nPlease enter your choice > ");
+            string output_unit = Console.ReadLine();
+            if (output_unit == "1")
+            {
+                Console.WriteLine("\nYou have selected Feet");
+                output_string = "Feet";
+            }
+            else if (output_unit == "2")
+            {
+                Console.WriteLine("\nYou have selected Metres");
+                output_string = "Metres";
+            }
+            else if (output_unit == "3")
+            {
+                Console.WriteLine("\nYou have selected Miles");
+                output_string = "Miles";
+            }
+
+        }
+
+        private void Converting()
+        {
+            Console.WriteLine("\nConverting " + output_string);
         }
 
 
 
 
-    /// <summary>
-    /// Promt the user to enter the distance in miles
-    /// Input the miles in a double number
-    /// </summary>
-    /// /// <author>
-    /// Liam Smith version 0.3
-    /// </author>
-    private void InputMiles()
+        /// <summary>
+        /// Promt the user to enter the distance in miles
+        /// Input the miles in a double number
+        /// </summary>
+        /// /// <author>
+        /// Liam Smith version 0.3
+        /// </author>
+        private void InputMiles()
         {
             Console.Write("Please enter the number of miles> ");
             string value = Console.ReadLine();
