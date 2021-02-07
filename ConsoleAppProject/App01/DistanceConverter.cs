@@ -31,7 +31,7 @@ namespace ConsoleAppProject.App01
         /// Displays a heading to the user
         /// </summary>
         /// /// <author>
-        /// Liam Smith version 0.1
+        /// Liam Smith version 0.2
         /// </author>
         private void OutputHeading()
         {
@@ -79,6 +79,29 @@ namespace ConsoleAppProject.App01
         private void OutputFeet()
         {
             Console.WriteLine(miles + " miles is " + feet + " feet!");
+        }
+
+        /// <summary>
+        /// Convert the input of feet to miles
+        /// Divide input by 5280
+        /// </summary>
+        /// /// <author>
+        /// Liam Smith version 0.2
+        /// </author>
+        private void CalculateMiles()
+        {
+            miles = feet / 5280;
+        }
+
+        /// <summary>
+        /// Display output of feet to miles
+        /// </summary>
+        /// /// <author>
+        /// Liam Smith version 0.2
+        /// </author>
+        private void OutputMiles()
+        {
+            Console.WriteLine(feet + " feet is " + miles + " miles!");
         }
     }
 }
