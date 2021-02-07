@@ -30,6 +30,7 @@ namespace ConsoleAppProject.App01
             OutputHeading();
             ConvertFrom();
             ConvertTo();
+            EnterDistance();
             
         }
         /// <summary>
@@ -57,7 +58,7 @@ namespace ConsoleAppProject.App01
         /// </author>
         private void ConvertFrom()
         {
-            Console.Write("Select unit to convert from> \n\n");
+            Console.Write("Select unit to convert from > \n\n");
             Console.Write("1. Feet\n2. Metres\n3. Miles\n\nPlease enter your choice > ");
             string input_unit = Console.ReadLine();
             if (input_unit == "1")
@@ -80,7 +81,7 @@ namespace ConsoleAppProject.App01
 
         public void ConvertTo()
         {
-            Console.Write("\nSelect unit to convert to> \n\n");
+            Console.Write("\nSelect unit to convert to > \n\n");
             Console.Write("1. Feet\n2. Metres\n3. Miles\n\nPlease enter your choice > ");
             string output_unit = Console.ReadLine();
             if (output_unit == "1")
@@ -103,7 +104,12 @@ namespace ConsoleAppProject.App01
 
         private void Converting()
         {
-            Console.WriteLine("\nConverting " + output_string);
+            Console.WriteLine("\nConverting " + input_string + " to " + output_string);
+        }
+
+        private void EnterDistance()
+        {
+            Console.Write("\nEnter distance in " + input_string + " >");
         }
 
 
