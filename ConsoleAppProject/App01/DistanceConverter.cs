@@ -2,16 +2,17 @@
 namespace ConsoleAppProject.App01
 {
     /// <summary>
-    /// An App to convert miles to feet and feet to miles
+    /// An App to convert miles to feet, feet to miles, and miles to metres
     /// </summary>
     /// <author>
-    /// Liam Smith version 0.1
+    /// Liam Smith version 0.3
     /// </author>
     public class DistanceConverter
     {
         private const int FEET_IN_MILES = 5280;
         private double miles;
         private double feet;
+        private double metres;
 
 
         /// <summary>
@@ -34,14 +35,15 @@ namespace ConsoleAppProject.App01
         /// Displays a heading to the user
         /// </summary>
         /// /// <author>
-        /// Liam Smith version 0.2
+        /// Liam Smith version 0.3
         /// </author>
         private void OutputHeading()
         {
             Console.WriteLine();
             Console.WriteLine("\n-----------------------------");
-            Console.WriteLine("     Convert Miles to Feet    ");
-            Console.WriteLine("       and Feet to Miles        ");
+            Console.WriteLine("     Convert Miles to Feet,    ");
+            Console.WriteLine("         Feet to Miles,        ");
+            Console.WriteLine("      and Miles to Metres        ");
             Console.WriteLine("         by Liam Smith        ");
             Console.WriteLine("-----------------------------\n");
             Console.WriteLine();
@@ -52,13 +54,14 @@ namespace ConsoleAppProject.App01
         /// Input the miles in a double number
         /// </summary>
         /// /// <author>
-        /// Liam Smith version 0.1
+        /// Liam Smith version 0.3
         /// </author>
         private void InputMiles()
         {
-            Console.Write("Please enter the number of miles > ");
+            Console.Write("Please enter the number of miles> ");
             string value = Console.ReadLine();
             miles = Convert.ToDouble(value);
+            metres = Convert.ToDouble(value);
         }
 
         /// <summary>
@@ -88,11 +91,11 @@ namespace ConsoleAppProject.App01
         /// Promts the user for an input in feet
         /// </summary>
         /// /// <author>
-        /// Liam Smith version 0.2
+        /// Liam Smith version 0.3
         /// </author>
         private void InputFeet()
         {
-            Console.Write("Please enter the number of feet > ");
+            Console.Write("Please enter the number of feet> ");
             string value = Console.ReadLine();
             feet = Convert.ToDouble(value);
         }
@@ -119,5 +122,16 @@ namespace ConsoleAppProject.App01
         {
             Console.WriteLine(feet + " feet is " + miles + " miles!");
         }
+
+        private void CalculateMetres()
+        {
+            metres = miles / 1609.34;
+        }
+
+        private void OutputMetres()
+        {
+            Console.WriteLine(miles + " miles is " + metres + " metres!");
+        }
+        
     }
 }
