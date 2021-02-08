@@ -13,11 +13,10 @@ namespace ConsoleAppProject.App01
         private double miles;
         private double feet;
         private double metres;
-        private string input_unit;
-        private string output_unit;
+        //private string input_unit;
+        //private string output_unit;
         public string input_string;
         public string output_string;
-
 
         /// <summary>
         /// Calls all methods to be run in order
@@ -34,6 +33,7 @@ namespace ConsoleAppProject.App01
             Conversion();
             
         }
+
         /// <summary>
         /// Displays a heading to the user
         /// </summary>
@@ -57,6 +57,7 @@ namespace ConsoleAppProject.App01
         /// /// <author>
         /// Liam Smith version 0.4
         /// </author>
+ 
         private void ConvertFrom()
         {
             Console.Write("Select unit to convert from > \n\n");
@@ -81,7 +82,7 @@ namespace ConsoleAppProject.App01
         }
 
         /// <summary>
-        /// Displays options of unit to convert to and stores an output variable to be displayed later
+        /// Displays options of unit to convert to and stores a public output variable to be displayed later
         /// </summary>
         public void ConvertTo()
         {
@@ -105,14 +106,26 @@ namespace ConsoleAppProject.App01
             }
 
         }
+
         /// <summary>
-        /// Displays what is about to be converted
+        /// Displays what is about to be converted using strings captured previously
         /// </summary>
         private void Converting()
         {
-            Console.WriteLine("\nConverting " + input_string + " to " + output_string + "\n");
+            if (input_string != output_string)
+            {
+                Console.WriteLine("\nConverting " + input_string + " to " + output_string + "\n");
+            }
+
+            else
+            {
+                Console.WriteLine("\nPlease select a different pair of units");
+            }
         }
 
+        /// <summary>
+        /// Selects what conversions to perform
+        /// </summary>
         private void Conversion()
         {
             if (input_string == "Feet" && output_string == "Metres")
@@ -221,11 +234,13 @@ namespace ConsoleAppProject.App01
             miles = feet / 5280;
         }
 
+        /// <summary>
+        /// Calculates feet to metres
+        /// </summary>
         private void FeetToMetres()
         {
             metres = feet * 0.3048;
         }
-
 
         /// <summary>
         /// Display output of feet to miles
@@ -260,6 +275,9 @@ namespace ConsoleAppProject.App01
             Console.WriteLine("\n" + miles + " miles is " + metres + " metres!");
         }
 
+        /// <summary>
+        /// promts user for input of metres and converts the input string to a double
+        /// </summary>
         private void InputMetres()
         {
                 Console.Write(" Enter distance in metres > ");
@@ -267,11 +285,17 @@ namespace ConsoleAppProject.App01
                 metres = Convert.ToDouble(value);
         }
 
+        /// <summary>
+        /// Calculates metres to feet and stores value as feet
+        /// </summary>
         private void MetresToFeet()
         {
             feet = metres / 0.3048;
         }
 
+        /// <summary>
+        /// Calculates metres to miles and stores value as miles
+        /// </summary>
         private void MetresToMiles()
         {
             miles = metres / 1609.34;
