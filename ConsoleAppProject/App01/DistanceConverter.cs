@@ -123,7 +123,7 @@ namespace ConsoleAppProject.App01
             {
                 InputFeet();
                 FeetToMetres();
-                Console.WriteLine("\n" + feet + " Feet is " + metres + " Metres !");
+                Console.WriteLine("\n " + feet + " Feet is " + metres + " Metres !");
             }
 
             else if (input_string == "Feet" && output_string == "Miles")
@@ -137,14 +137,14 @@ namespace ConsoleAppProject.App01
             {
                 InputMetres();
                 MetresToFeet();
-                Console.WriteLine("\n" + metres + " Metres is " + feet + " Feet !");
+                Console.WriteLine("\n " + metres + " Metres is " + feet + " Feet !");
             }
 
             else if (input_string == "Metres" && output_string == "Miles")
             {
                 InputMetres();
                 MetresToMiles();
-                Console.WriteLine("\n" + metres + " Metres is " + miles + " Miles !");
+                Console.WriteLine("\n " + metres + " Metres is " + miles + " Miles !");
             }
 
             else if (input_string == "Miles" && output_string == "Feet")
