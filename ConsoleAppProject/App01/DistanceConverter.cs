@@ -54,7 +54,7 @@ namespace ConsoleAppProject.App01
         private void ConvertFrom()
         {
             Console.Write(" Select unit to convert from > \n\n");
-            Console.Write(" 1. Feet\n2. Metres\n3. Miles\n\nPlease enter your choice > ");
+            Console.Write(" 1. Feet\n 2. Metres\n 3. Miles\n\n Please enter your choice > ");
             string input_unit = Console.ReadLine();
             if (input_unit == "1")
             {
