@@ -2,7 +2,9 @@
 namespace ConsoleAppProject.App01
 {
     /// <summary>
-    /// An App to convert distance
+    /// This app will prompt a user to select a unit of distance to be converted to another unit
+    /// either feet, metres or miles. The user will be prompted for a measurement of the selected distance.
+    /// The distance will be converted and the output will be displayed.
     /// </summary>
     /// <author>
     /// Liam Smith version 0.4
@@ -10,36 +12,31 @@ namespace ConsoleAppProject.App01
     public class DistanceConverter
     {
         private const int FEET_IN_MILES = 5280;
+        private const double METRES_IN_MILES = 1609.34;
+        private const double FEET_IN_METRES = 3.28084;
+
         private double miles;
         private double feet;
         private double metres;
-        //private string input_unit;
-        //private string output_unit;
+
         public string input_string;
         public string output_string;
 
         /// <summary>
         /// Calls all methods to be run in order
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.2
-        /// </author>
         public void Run()
         {
             OutputHeading();
             ConvertFrom();
             ConvertTo();
             Converting();
-            Conversion();
-            
+            Conversion(); 
         }
 
         /// <summary>
         /// Displays a heading to the user
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.3
-        /// </author>
         private void OutputHeading()
         {
             Console.WriteLine();
@@ -54,10 +51,6 @@ namespace ConsoleAppProject.App01
         /// Promt the user to select a unit of distance to convert from
         /// uses an if statement to check for conditions
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.4
-        /// </author>
- 
         private void ConvertFrom()
         {
             Console.Write("Select unit to convert from > \n\n");
@@ -78,7 +71,6 @@ namespace ConsoleAppProject.App01
                 Console.WriteLine("\nYou have selected Miles");
                 input_string = "Miles";
             }
-            
         }
 
         /// <summary>
@@ -104,7 +96,6 @@ namespace ConsoleAppProject.App01
                 Console.WriteLine("\nYou have selected Miles");
                 output_string = "Miles";
             }
-
         }
 
         /// <summary>
@@ -169,16 +160,12 @@ namespace ConsoleAppProject.App01
                 CalculateMetres();
                 OutputMetres();
             }
-
         }
 
         /// <summary>
         /// Promt the user to enter the distance in miles
         /// Input the miles in a double number
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.3
-        /// </author>
         private void InputMiles()
         {
             Console.Write(" Enter distance in miles > ");
@@ -188,11 +175,7 @@ namespace ConsoleAppProject.App01
 
         /// <summary>
         /// Convert the input of miles to feet
-        /// Multiply miles * 5280
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.1
-        /// </author>
         private void CalculateFeet()
         {
             feet = miles * 5280;
@@ -201,9 +184,6 @@ namespace ConsoleAppProject.App01
         /// <summary>
         /// Display result of the previous calculation to the user
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.1
-        /// </author>
         private void OutputFeet()
         {
             Console.WriteLine("\n" + miles + " miles is " + feet + " feet!");
@@ -212,9 +192,6 @@ namespace ConsoleAppProject.App01
         /// <summary>
         /// Promts the user for an input in feet
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.3
-        /// </author>
         private void InputFeet()
         {
             Console.Write(" Enter distance in feet > ");
@@ -224,11 +201,7 @@ namespace ConsoleAppProject.App01
 
         /// <summary>
         /// Convert the input of feet to miles
-        /// Divide input by 5280
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.2
-        /// </author>
         private void CalculateMiles()
         {
             miles = feet / 5280;
@@ -245,9 +218,6 @@ namespace ConsoleAppProject.App01
         /// <summary>
         /// Display output of feet to miles
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.2
-        /// </author>
         private void OutputMiles()
         {
             Console.WriteLine("\n" + feet + " feet is " + miles + " miles!");
@@ -256,9 +226,6 @@ namespace ConsoleAppProject.App01
         /// <summary>
         /// Converts input of miles to metres
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.3
-        /// </author>
         private void CalculateMetres()
         {
             metres = miles * 1609.34;
@@ -267,9 +234,6 @@ namespace ConsoleAppProject.App01
         /// <summary>
         /// Displays output of miles to metres
         /// </summary>
-        /// /// <author>
-        /// Liam Smith version 0.3
-        /// </author>
         private void OutputMetres()
         {
             Console.WriteLine("\n" + miles + " miles is " + metres + " metres!");
