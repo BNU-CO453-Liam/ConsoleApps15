@@ -11,7 +11,7 @@ namespace ConsoleAppProject.App02
     /// Display results to the user.
     /// </summary>
     /// <author>
-    /// Student Name version 0.3
+    /// Student Name version 1.3
     /// </author>
 
     public class BMI

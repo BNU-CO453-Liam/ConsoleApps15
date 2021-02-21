@@ -39,7 +39,7 @@ namespace ConsoleAppProject
                 Console.WriteLine(" Select a program > ");
                 Console.WriteLine();
                 Console.WriteLine(" 1. App 01 - Distance Converter 1.4");
-                Console.WriteLine(" 2. App 02 - BMI Calculator 1.0");
+                Console.WriteLine(" 2. App 02 - BMI Calculator 1.3");
                 Console.WriteLine();
 
                 string programChoice = Console.ReadLine();
