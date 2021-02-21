@@ -11,7 +11,7 @@ namespace ConsoleAppProject.App02
     /// Display results to the user.
     /// </summary>
     /// <author>
-    /// Student Name version 0.2
+    /// Student Name version 0.3
     /// </author>
 
     public class BMI
@@ -45,7 +45,7 @@ namespace ConsoleAppProject.App02
         public void Run()
         {
             OutputHeading();
-            Calculations();
+            SelectCalculation();
         }
 
         private void OutputHeading()
@@ -56,6 +56,33 @@ namespace ConsoleAppProject.App02
             Console.WriteLine("         by Liam Smith        ");
             Console.WriteLine("-----------------------------\n");
             Console.WriteLine();
+        }
+
+        private void SelectCalculation()
+        {
+            Console.WriteLine(" Are you aged 20 or younger? Enter Y/N");
+            string age = Console.ReadLine();
+
+            while (age != "")
+            {
+                if (age.ToUpper() == "Y")
+                {
+                    YouthCalculations();
+                    break;
+                }
+
+                else if (age.ToUpper() == "N")
+                {
+                    AdultCalculations();
+                    break;
+                }
+            }
+
+        }
+
+        private void YouthCalculations()
+        {
+            Console.WriteLine(" do this");
         }
 
         private string SelectHeightUnit()
@@ -171,7 +198,7 @@ namespace ConsoleAppProject.App02
             }
         }
 
-        private void Calculations()
+        private void AdultCalculations()
         {
 
             SelectHeightUnit();
@@ -185,8 +212,10 @@ namespace ConsoleAppProject.App02
             ConvertWeight();
 
             CalculateBMI();
+            AdultResultsCategory();
 
             Console.WriteLine($"\n Your BMI is {bmiResult}");
+            Console.WriteLine($"\n You are {bmiCategory}");
 
         }
 
@@ -196,7 +225,7 @@ namespace ConsoleAppProject.App02
             bmiResult = Convert.ToInt32(bmiFormula);
         }
 
-        private void ResultsCategory()
+        private void AdultResultsCategory()
         {
             if (bmiResult > 12 && bmiResult < 18.5)
             {
