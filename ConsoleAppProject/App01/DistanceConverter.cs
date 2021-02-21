@@ -32,10 +32,11 @@ namespace ConsoleAppProject.App01
         {
             OutputHeading();
             ConvertDistance();
+            OutputResult();
         }
 
         /// <summary>
-        /// Displays a heading to the user
+        /// Displays a heading to the user.
         /// </summary>
         private void OutputHeading()
         {
@@ -83,8 +84,6 @@ namespace ConsoleAppProject.App01
         /// <summary>
         /// Executes choice selected.
         /// </summary>
-        /// <param name="choice"></param>
-        /// <returns></returns>
         private static string ExecuteChoice(string choice)
         {
             if (choice == "1")
@@ -195,8 +194,6 @@ namespace ConsoleAppProject.App01
             fromDistance = InputDistance($" Enter the distance in {fromUnit} > ");
 
             Conversion();
-
-            OutputResult();
         }
     }
 }
