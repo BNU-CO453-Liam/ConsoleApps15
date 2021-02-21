@@ -40,6 +40,7 @@ namespace ConsoleAppProject.App02
 
         private double bmiFormula;
         private int bmiResult;
+        private string bmiCategory;
 
         public void Run()
         {
@@ -193,9 +194,30 @@ namespace ConsoleAppProject.App02
         {
             bmiFormula = weightInKilograms / (heightInMetres * heightInMetres);
             bmiResult = Convert.ToInt32(bmiFormula);
-
         }
-        
+
+        private void ResultsCategory()
+        {
+            if (bmiResult > 12 && bmiResult < 18.5)
+            {
+                bmiCategory = "Underweight";
+            }
+
+            else if (bmiResult > 18.5 && bmiResult < 24.9)
+            {
+                bmiCategory = "a Healthy weight";
+            }
+
+            else if (bmiResult > 25 && bmiResult < 29.9)
+            {
+                bmiCategory = "Overweight";
+            }
+
+            else if (bmiResult > 29.9)
+            {
+                bmiCategory = "Obese";
+            }
+        }
     }
 }
 
