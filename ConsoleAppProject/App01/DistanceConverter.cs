@@ -4,6 +4,7 @@ namespace ConsoleAppProject.App01
     /// <summary>
     /// This app will prompt a user to select a unit of distance to be converted to another unit
     /// either FEET, METRES or MILES. The user will be prompted for a measurement of the selected distance.
+    /// The user selections will be validated.
     /// The distance will be converted and the output will be displayed.
     /// </summary>
     /// <author>
@@ -33,9 +34,7 @@ namespace ConsoleAppProject.App01
 
             ConvertDistance();
 
-            //InputValidation();
-
-            //RoundResult();
+            RoundResult();
 
             OutputResult();
         }
@@ -71,7 +70,7 @@ namespace ConsoleAppProject.App01
         /// <summary>
         /// Displays choice of units to be selected from.
         /// </summary>
-        private static string DisplayChoices(string prompt)
+        public static string DisplayChoices(string prompt)
         {
             Console.WriteLine();
             Console.WriteLine($" 1. {FEET}");
@@ -91,22 +90,22 @@ namespace ConsoleAppProject.App01
         /// </summary>
         private static string ExecuteChoice(string choice)
         {
-            if (choice == "1")
+            switch (choice)
             {
-                return FEET;
-            }
+                case "1":
+                    return FEET;
 
-            else if (choice == "2")
-            {
-                return METRES;
-            }
+                case "2":
+                    return METRES;
 
-            else if (choice == "3")
-            {
-                return MILES;
-            }
+                case "3":
+                    return MILES;
 
-            return null;
+                default:
+                    break;
+                }
+
+            return choice;
         }
 
         /// <summary>
@@ -118,9 +117,19 @@ namespace ConsoleAppProject.App01
             Console.Write(prompt);
 
             string value = Console.ReadLine();
-            
+
+            value = ValidateDouble(value);
+
+            return Convert.ToDouble(value);
+        }
+
+        /// <summary>
+        /// If user input is not a double number, they will be prompted for input again.
+        /// </summary>
+        private string ValidateDouble(string value)
+        {
             double num = -1;
-            
+
             while (!double.TryParse(value, out num))
             {
                 Console.WriteLine("\n Invalid distance\n");
@@ -132,14 +141,13 @@ namespace ConsoleAppProject.App01
                 break;
             }
 
-            return Convert.ToDouble(value);
-
+            return value;
         }
 
         /// <summary>
         /// Displays what is about to be converted using strings captured previously.
         /// If both selected units are identical, the user is displayed an error message
-        /// and forced to repeat the unit selection process.
+        /// and forced to repeat the previous unit selection process.
         /// </summary>
         private void Converting()
         {
@@ -151,7 +159,7 @@ namespace ConsoleAppProject.App01
             else
             {
                 Console.WriteLine("\n Please select a different pair of units !\n");
-                ConvertDistance();
+                ValidateToUnit();
             }
         }
 
@@ -194,36 +202,70 @@ namespace ConsoleAppProject.App01
         }
 
         /// <summary>
-        /// Rounds result ##AND##
         /// Displays result of conversion.
         /// </summary>
         public void OutputResult()
         {
-            double result = Math.Round(ToDistance, 5, MidpointRounding.AwayFromZero);
+            double result = RoundResult();
 
             Console.Write($"\n {FromDistance} {FromUnit} is {result} {ToUnit} !\n");
         }
 
         /// <summary>
+        /// Rounds result to appropriate decimal place.
+        /// </summary>
+        private double RoundResult()
+        {
+            return Math.Round(ToDistance, 5, MidpointRounding.AwayFromZero);
+        }
+
+        /// <summary>
         /// Prompts the user for the units to be converted.
         /// Displays what is about to be converted.
-        /// 
         /// </summary>
         public void ConvertDistance()
         {
-            FromUnit = SelectUnit(" Select the from distance unit > ");
-            ToUnit = SelectUnit(" Select the to distance unit > ");
-
-            Converting();
+            ValidateFromUnit();
 
             FromDistance = InputDistance($" Enter the distance in {FromUnit} > ");
 
             Conversion();
         }
 
-       // private void InputValidation()
-        //{
-          //  FromDistance = InputDistance($" Enter the distance in {FromUnit} > ");
-        //}
+        /// <summary>
+        /// Checks if the user has selected a valid option.
+        /// </summary>
+        private void ValidateFromUnit()
+        {
+            FromUnit = SelectUnit("\n Select the from distance unit > ");
+            
+            if (FromUnit == FEET || FromUnit == METRES || FromUnit == MILES)
+            {
+                ValidateToUnit();
+            }
+            else
+            {    
+                Console.WriteLine("\n Invalid unit\n");
+                ValidateFromUnit();
+            }
+        }
+
+        /// <summary>
+        /// Checks if the user has selected a valid option
+        /// </summary>
+        private void ValidateToUnit()
+        {
+            ToUnit = SelectUnit("\n Select the to distance unit > ");
+
+            if (ToUnit == FEET || ToUnit == METRES || ToUnit == MILES)
+            {
+                Converting();
+            }
+            else
+            {
+                Console.WriteLine("\n Invalid unit\n");
+                ValidateToUnit();
+            }
+        }
     }
 }
