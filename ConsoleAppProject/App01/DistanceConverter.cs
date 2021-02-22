@@ -12,7 +12,7 @@ namespace ConsoleAppProject.App01
     public class DistanceConverter
     {
         private const int FEET_IN_MILES = 5280;
-        private const double METRES_IN_MILES = 1609.34;
+        private const double METRES_IN_MILES = 1609.344;
         private const double FEET_IN_METRES = 3.28084;
 
         public const string FEET = "Feet";
@@ -30,7 +30,13 @@ namespace ConsoleAppProject.App01
         public void Run()
         {
             OutputHeading();
+
             ConvertDistance();
+
+            //InputValidation();
+
+            //RoundResult();
+
             OutputResult();
         }
 
@@ -105,13 +111,29 @@ namespace ConsoleAppProject.App01
 
         /// <summary>
         /// Promts the user to input distance converting from.
-        /// Stores value as a double number.
+        /// Validates user input is a double number or prompts the user again.
         /// </summary>
         private double InputDistance(string prompt)
         {
             Console.Write(prompt);
+
             string value = Console.ReadLine();
+            
+            double num = -1;
+            
+            while (!double.TryParse(value, out num))
+            {
+                Console.WriteLine("\n Invalid distance\n");
+
+                FromDistance = InputDistance($" Enter the distance in {FromUnit} > ");
+
+                value = Convert.ToString(FromDistance);
+
+                break;
+            }
+
             return Convert.ToDouble(value);
+
         }
 
         /// <summary>
@@ -151,7 +173,7 @@ namespace ConsoleAppProject.App01
 
             else if (FromUnit == METRES && ToUnit == FEET)
             {
-                ToDistance = FromDistance / FEET_IN_METRES;
+                ToDistance = FromDistance * FEET_IN_METRES;
             }
 
             else if (FromUnit == METRES && ToUnit == MILES)
@@ -168,14 +190,18 @@ namespace ConsoleAppProject.App01
             {
                 ToDistance = FromDistance * METRES_IN_MILES;
             }
+
         }
 
         /// <summary>
+        /// Rounds result ##AND##
         /// Displays result of conversion.
         /// </summary>
         public void OutputResult()
         {
-            Console.Write($"\n {FromDistance} {FromUnit} is {ToDistance} {ToUnit} !\n");
+            double result = Math.Round(ToDistance, 5, MidpointRounding.AwayFromZero);
+
+            Console.Write($"\n {FromDistance} {FromUnit} is {result} {ToUnit} !\n");
         }
 
         /// <summary>
@@ -194,5 +220,10 @@ namespace ConsoleAppProject.App01
 
             Conversion();
         }
+
+       // private void InputValidation()
+        //{
+          //  FromDistance = InputDistance($" Enter the distance in {FromUnit} > ");
+        //}
     }
 }
