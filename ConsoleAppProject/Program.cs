@@ -11,7 +11,7 @@ namespace ConsoleAppProject
     /// to start Apps 01 to 05 for CO453 CW1
     /// 
     /// This Project has been modified by:
-    /// Liam Smith 04/02/2021
+    /// Liam Smith 26/02/2021
     /// </summary>
     public static class Program
     {
@@ -31,17 +31,15 @@ namespace ConsoleAppProject
             Console.WriteLine(" -----------------------------\n");
             Console.WriteLine();
             Console.WriteLine();
+            Console.WriteLine(" 1. App 01 - Distance Converter 1.4");
+            Console.WriteLine(" 2. App 02 - Body Mass Index Calculator 1.4");
+            Console.WriteLine();
 
             int i = 0;
             
             while(i < 1)         
             {
-                Console.WriteLine(" Select a program > ");
-                Console.WriteLine();
-                Console.WriteLine(" 1. App 01 - Distance Converter 1.4");
-                Console.WriteLine(" 2. App 02 - BMI Calculator 1.3");
-                Console.WriteLine();
-
+                Console.Write(" Select a program > ");
                 string programChoice = Console.ReadLine();
 
                 switch (programChoice)
@@ -52,19 +50,19 @@ namespace ConsoleAppProject
                         Console.Clear();
                         Console.WriteLine(" \nApp 01 - Distance Converter selected. . . ");
 
-                        Task.Delay(2000).Wait();
+                        Task.Delay(1000).Wait();
                         Console.Clear();
 
                         converter.Run();
                         break;
 
                     case "2":
-                        BMI calculator = new BMI();
+                        BmiCalculator calculator = new BmiCalculator();
                         i++;
                         Console.Clear();
                         Console.WriteLine(" \nApp 02 - BMI Calculator selected. . . ");
 
-                        Task.Delay(2000).Wait();
+                        Task.Delay(1000).Wait();
                         Console.Clear();
 
                         calculator.Run();
