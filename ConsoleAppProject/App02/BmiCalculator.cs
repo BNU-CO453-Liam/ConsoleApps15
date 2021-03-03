@@ -47,10 +47,10 @@ namespace ConsoleAppProject.App02
         {
             Console.WriteLine("BNU CO453 Applications Programming 2020-2021!");
             Console.WriteLine();
-            Console.WriteLine("\n----------------------------------");
-            Console.WriteLine("  Body Mass Index Calculator 1.4    ");
-            Console.WriteLine("          by Liam Smith        ");
-            Console.WriteLine("----------------------------------\n");
+            Console.WriteLine("\n------------------------------");
+            Console.WriteLine("  Body Mass Index Calculator ");
+            Console.WriteLine("        by Liam Smith        ");
+            Console.WriteLine("------------------------------\n");
             Console.WriteLine();
         }
 
