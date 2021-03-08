@@ -1,5 +1,6 @@
 ﻿using ConsoleAppProject.App01;
 using ConsoleAppProject.App02;
+using ConsoleAppProject.App03;
 using System;
 using System.Threading.Tasks;
 
@@ -33,6 +34,7 @@ namespace ConsoleAppProject
             Console.WriteLine();
             Console.WriteLine(" 1. App 01 - Distance Converter 1.4");
             Console.WriteLine(" 2. App 02 - Body Mass Index Calculator 1.4");
+            Console.WriteLine(" 2. App 03 - Student Grades 1.0");
             Console.WriteLine();
 
             int i = 0;
@@ -66,6 +68,18 @@ namespace ConsoleAppProject
                         Console.Clear();
 
                         calculator.Run();
+                        break;
+
+                    case "3":
+                        StudentGrades grades = new StudentGrades();
+                        i++;
+                        Console.Clear();
+                        Console.WriteLine(" \nApp 03 - Student Grades selected. . . ");
+
+                        Task.Delay(1000).Wait();
+                        Console.Clear();
+
+                        //grades.Run();
                         break;
 
                     default:

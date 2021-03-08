@@ -1,15 +1,28 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ConsoleAppProject.App03;
+using ConsoleAppProject.Helpers;
 
 namespace ConsoleAppTests
 {
     [TestClass]
-    class TestStudentGrades
+    public class TestStudentGrades
     {
+        private readonly StudentGrades converter = new StudentGrades();
+
         [TestMethod]
-        private void Test1()
+        public void Convert0ToGradeF()
         {
-            throw new ;
+            // Arrange
+
+            Grades expectedGrade = Grades.F;
+
+            // Act
+
+            Grades actualGrade = converter.ConvertToGrade(0);
+
+            // Assert
+
+            Assert.AreEqual(expectedGrade, actualGrade);
         }
     }
 }

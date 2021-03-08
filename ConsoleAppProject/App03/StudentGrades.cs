@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using ConsoleAppProject.Helpers;
 
 namespace ConsoleAppProject.App03
 {
@@ -10,8 +12,17 @@ namespace ConsoleAppProject.App03
     /// <author>
     /// Liam Smith 1.0
     /// </author>
-    class StudentGrades
+    public class StudentGrades
     {
+
+        public const int LowestMark = 0;
+        public const int LowestGradeD = 40;
+        public const int LowestGradeC = 50;
+        public const int LowestGradeB = 60;
+        public const int LowestGradeA = 70;
+        public const int HighestMark = 100;
+
+
         public string[] Students { get; set; }
         public int[] Marks { get; set; }
         public int[] GradeProfile { get; set; }
@@ -19,29 +30,6 @@ namespace ConsoleAppProject.App03
         public int Minimum { get; set; }
         public int Maximum { get; set; }
 
-        /// <summary>
-        /// Grade A is First Class      : 70 - 100
-        /// Grade B is Upper Second     : 60 - 69
-        /// Grade C is Lower Second     : 50 - 59
-        /// Grade D is Third Class      : 40 - 49
-        /// Grade E is Fourth Class     : 30 - 39
-        /// Grade F is Fail             : 0 - 29
-        /// </summary>
-        public enum Grades
-        {
-            [Description("Fail")]
-            F,
-            [Description("Fourth Class")]
-            E,
-            [Description("Third Class")]
-            D,
-            [Description("Lower Second")]
-            C,
-            [Description("Upper Second")]
-            B,
-            [Description("First Class")]
-            A,
-        }
 
         /// <summary>
         /// Class constructor called when an object
@@ -57,7 +45,7 @@ namespace ConsoleAppProject.App03
                 "Lance"
             };
 
-            GradeProfile = new int[(int)Grade.A + 1];
+            GradeProfile = new int[(int)Grades.A + 1];
             Marks = new int[Students.Length];
                 
         }
@@ -68,7 +56,7 @@ namespace ConsoleAppProject.App03
         /// </summary>
         public void InputMarks()
         {
-            throw new NotImplementedException;
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -77,16 +65,23 @@ namespace ConsoleAppProject.App03
         /// </summary>
         public void OutputMarks()
         {
-            throw new NotImplementedException;
+            throw new NotImplementedException();
         }
 
         /// <summary>
         /// Convert a student mark to a grade
         /// from F (Fail) to A (First Class)
         /// </summary>
-        public Grade ConvertToGrade(int mark)
+        public Grades ConvertToGrade(int mark)
         {
-            throw new NotImplementedException;
+            if (mark >= 0 && mark < LowestGradeD)
+            {
+                return Grades.F;
+            }
+            else
+            {
+                return Grades.B;
+            }
         }
 
         /// <summary>
@@ -95,7 +90,7 @@ namespace ConsoleAppProject.App03
         /// </summary>
         public void CalculateStats()
         {
-            throw new NotImplementedException;
+            throw new NotImplementedException();
         }
     }
 }
