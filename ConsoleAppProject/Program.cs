@@ -12,7 +12,7 @@ namespace ConsoleAppProject
     /// to start Apps 01 to 05 for CO453 CW1
     /// 
     /// This Project has been modified by:
-    /// Liam Smith 26/02/2021
+    /// Liam Smith 09/03/2021
     /// </summary>
     public static class Program
     {
@@ -27,14 +27,14 @@ namespace ConsoleAppProject
             Console.WriteLine("BNU CO453 Applications Programming 2020-2021!");
             Console.WriteLine();
             Console.WriteLine("\n -----------------------------");
-            Console.WriteLine("        Apps 01 - 02    ");
+            Console.WriteLine("        Apps 01 - 03    ");
             Console.WriteLine("        by Liam Smith        ");
             Console.WriteLine(" -----------------------------\n");
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine(" 1. App 01 - Distance Converter 1.4");
             Console.WriteLine(" 2. App 02 - Body Mass Index Calculator 1.4");
-            Console.WriteLine(" 2. App 03 - Student Grades 1.0");
+            Console.WriteLine(" 2. App 03 - Student Grades 1.1");
             Console.WriteLine();
 
             int i = 0;
@@ -79,7 +79,7 @@ namespace ConsoleAppProject
                         Task.Delay(1000).Wait();
                         Console.Clear();
 
-                        //grades.Run();
+                        grades.Run();
                         break;
 
                     default:

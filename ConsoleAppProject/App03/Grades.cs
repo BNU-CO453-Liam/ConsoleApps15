@@ -9,14 +9,14 @@ namespace ConsoleAppProject.Helpers
     /// Grade B is Upper Second  : 60 - 69
     /// Grade C is Lower Second  : 50 - 59
     /// Grade D is Third Class   : 40 - 49
-    /// Grade E is Fourth Class  : 30 - 39
-    /// Grade F is Fail          :  0 - 29
+    /// Grade E is Marginal Fail : 35 - 39
+    /// Grade F is Fail          :  0 - 34
     /// </summary>
     public enum Grades
     {
         [Description("Fail")]
         F,
-        [Description("Fourth Class")]
+        [Description("Marginal Fail")]
         E,
         [Description("Third Class")]
         D, 
