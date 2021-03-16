@@ -83,43 +83,11 @@ namespace ConsoleAppTests
         }
 
         [TestMethod]
-        public void Convert34ToGradeF()
+        public void Convert39ToGradeF()
         {
             // Arrange
 
             Grades expectedGrade = Grades.F;
-
-            // Act
-
-            Grades actualGrade = converter.ConvertToGrade(34);
-
-            // Assert
-
-            Assert.AreEqual(expectedGrade, actualGrade);
-        }
-
-        [TestMethod]
-        public void Convert35ToGradeE()
-        {
-            // Arrange
-
-            Grades expectedGrade = Grades.E;
-
-            // Act
-
-            Grades actualGrade = converter.ConvertToGrade(35);
-
-            // Assert
-
-            Assert.AreEqual(expectedGrade, actualGrade);
-        }
-
-        [TestMethod]
-        public void Convert39ToGradeE()
-        {
-            // Arrange
-
-            Grades expectedGrade = Grades.E;
 
             // Act
 

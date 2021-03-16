@@ -199,7 +199,6 @@ namespace ConsoleAppProject.App01
             {
                 ToDistance = FromDistance * METRES_IN_MILES;
             }
-
         }
 
         /// <summary>
