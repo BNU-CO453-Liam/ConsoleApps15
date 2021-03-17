@@ -5,6 +5,8 @@ using ConsoleAppProject.Helpers;
 namespace ConsoleAppProject.App03
 {
     /// <summary>
+    /// Student Marks 1.2
+    /// 
     /// This app will prompt a user to select from a list of options:
     /// input marks, output marks, output stats, output grade profile,
     /// and quit.
@@ -14,7 +16,7 @@ namespace ConsoleAppProject.App03
     /// input another set of marks, display the requested data or quit the application.
     /// </summary>
     /// <author>
-    /// Liam Smith 1.0
+    /// Liam Smith
     /// </author>
     public class StudentGrades
     {
@@ -92,11 +94,8 @@ namespace ConsoleAppProject.App03
         private void ShowOptions()
         {
             Console.WriteLine();
-            Console.WriteLine(" 1. Input Marks");
-            Console.WriteLine(" 2. Output Marks");
-            Console.WriteLine(" 3. Output Stats");
-            Console.WriteLine(" 4. Output Grade Profile");
-            Console.WriteLine(" 5. Quit");
+            Console.WriteLine(" 1. Input Marks | 2. Output Marks | 3. Output Stats");
+            Console.WriteLine(" 4. Output Grade Profile | 5. Quit");
 
             student = 0;
             SelectOption();
@@ -162,7 +161,7 @@ namespace ConsoleAppProject.App03
         /// </summary>
         private void InputMarks()
         {
-            Console.WriteLine("\n Please enter a mark for each student\n");
+            Console.WriteLine("\n Please enter a mark for each student:\n");
 
             while (student < Students.Length)
             {
@@ -184,6 +183,8 @@ namespace ConsoleAppProject.App03
         /// </summary>
         public void OutputMarks()
         {
+            Console.WriteLine("\n Student marks:");
+
             int i = 0;
             while (i < Students.Length)
             {
@@ -321,7 +322,7 @@ namespace ConsoleAppProject.App03
 
             else
             {
-                Console.WriteLine($" Enter a value in the range of {LowestMark} and {HighestMark}");
+                Console.WriteLine($" Enter a value in the range of {LowestMark} and {HighestMark}!");
 
                 Console.Write($"\n Mark for { Students[student] } > ");
 

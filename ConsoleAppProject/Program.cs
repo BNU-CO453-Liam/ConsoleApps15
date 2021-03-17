@@ -32,9 +32,9 @@ namespace ConsoleAppProject
             Console.WriteLine(" -----------------------------\n");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine(" 1. App 01 - Distance Converter 0.4");
-            Console.WriteLine(" 2. App 02 - Body Mass Index Calculator 0.4");
-            Console.WriteLine(" 2. App 03 - Student Grades 0.1");
+            Console.WriteLine(" 1. App 01 - Distance Converter 1.4");
+            Console.WriteLine(" 2. App 02 - Body Mass Index Calculator 1.4");
+            Console.WriteLine(" 2. App 03 - Student Grades 1.2");
             Console.WriteLine();
 
             int i = 0;
