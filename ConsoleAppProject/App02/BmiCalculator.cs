@@ -12,7 +12,7 @@ namespace ConsoleAppProject.App02
     /// Display results to the user with associated bmi range.
     /// </summary>
     /// <author>
-    /// Student Name version 0.4
+    /// Student Name version 1.4
     /// </author>
 
     public class BmiCalculator

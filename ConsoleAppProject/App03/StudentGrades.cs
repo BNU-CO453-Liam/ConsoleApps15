@@ -5,8 +5,6 @@ using ConsoleAppProject.Helpers;
 namespace ConsoleAppProject.App03
 {
     /// <summary>
-    /// Student Marks 1.2
-    /// 
     /// This app will prompt a user to select from a list of options:
     /// input marks, output marks, output stats, output grade profile,
     /// and quit.
@@ -16,7 +14,7 @@ namespace ConsoleAppProject.App03
     /// input another set of marks, display the requested data or quit the application.
     /// </summary>
     /// <author>
-    /// Liam Smith
+    /// Liam Smith version 1.3
     /// </author>
     public class StudentGrades
     {

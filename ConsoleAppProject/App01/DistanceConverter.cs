@@ -8,7 +8,7 @@ namespace ConsoleAppProject.App01
     /// The distance will be converted and the output will be displayed.
     /// </summary>
     /// <author>
-    /// Liam Smith version 0.4
+    /// Liam Smith version 1.4
     /// </author>
     public class DistanceConverter
     {
