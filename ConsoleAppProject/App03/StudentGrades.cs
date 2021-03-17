@@ -38,11 +38,11 @@ namespace ConsoleAppProject.App03
         public int Minimum { get; set; }
         public int Maximum { get; set; }
 
-        public int addMark;
+        public int AddMark { get; set; }
 
-        public string inputMark;
+        public string InputMark { get; set; }
 
-        public int student = 0;
+        private int studentIndex = 0;
 
         /// <summary>
         /// Class constructor called when an object
@@ -59,6 +59,7 @@ namespace ConsoleAppProject.App03
             };
 
             GradeProfile = new int[(int)Grades.A + 1];
+
             Marks = new int[Students.Length];             
         }
 
@@ -89,7 +90,7 @@ namespace ConsoleAppProject.App03
         }
 
         /// <summary>
-        /// Displays a list of options for the user to select from.
+        /// Displays a menu of options for the user to select from.
         /// </summary>
         private void ShowOptions()
         {
@@ -97,7 +98,7 @@ namespace ConsoleAppProject.App03
             Console.WriteLine(" 1. Input Marks | 2. Output Marks | 3. Output Stats");
             Console.WriteLine(" 4. Output Grade Profile | 5. Quit");
 
-            student = 0;
+            //studentIndex = 0;
             SelectOption();
         }
 
@@ -157,24 +158,29 @@ namespace ConsoleAppProject.App03
 
         /// <summary>
         /// Input a mark between 0 - 100 for each
-        /// student and store it in the marks array
+        /// student and stores value in the Marks array.
+        /// Resets studentIndex to zero for when this method is called next.
+        /// The studentIndex cannot be limited to this scope as it is required for
+        /// error handling.
         /// </summary>
         private void InputMarks()
         {
             Console.WriteLine("\n Please enter a mark for each student:\n");
 
-            while (student < Students.Length)
+            while (studentIndex < Students.Length)
             {
-                Console.Write($" Mark for { Students[student] } > ");
+                Console.Write($" Mark for { Students[studentIndex] } > ");
 
-                inputMark = Console.ReadLine();
+                InputMark = Console.ReadLine();
 
                 ValidateInput();
 
-                Marks[student] = addMark;
+                Marks[studentIndex] = AddMark;
 
-                student++;
+                studentIndex++;
             }
+
+            studentIndex = 0;
         }
 
         /// <summary>
@@ -309,47 +315,54 @@ namespace ConsoleAppProject.App03
         }
 
         /// <summary>
-        /// Checks that the user input for a students mark is a number using regular expressions.
+        /// Checks that the input is not blank.
+        /// Checks the input is a number.
         /// Checks the number is between 0 and 100.
-        /// If not the user is prompted to re enter the mark.
+        /// If not the HandleError method is called.
+        /// If input is valid the input is converted to an int and returned.
         /// </summary>
         private int ValidateInput()
         {
-            if (Regex.IsMatch(inputMark, AllowedChars))
+            if (InputMark != "" && Regex.IsMatch(InputMark, AllowedChars))
             {
-                addMark = Convert.ToInt32(inputMark);
+                AddMark = Convert.ToInt32(InputMark);
             }
 
             else
             {
-                Console.WriteLine($" Enter a value in the range of {LowestMark} and {HighestMark}!");
-
-                Console.Write($"\n Mark for { Students[student] } > ");
-
-                inputMark = Console.ReadLine();
-
-                ValidateInput();
+                HandleError();
 
             }
 
-            if (addMark < LowestMark || addMark > HighestMark)
+            if (AddMark < LowestMark || AddMark > HighestMark)
             {
 
-                Console.WriteLine($" Enter a value in the range of {LowestMark} and {HighestMark}");
-
-                Console.Write($"\n Mark for { Students[student] } > ");
-
-                inputMark = Console.ReadLine();
-
-                ValidateInput();
+                HandleError();
             }
 
             else
             {
-                addMark = Convert.ToInt32(inputMark);
+                AddMark = Convert.ToInt32(InputMark);
             }
 
-            return addMark;
+            return AddMark;
+        }
+
+        /// <summary>
+        /// Tells the user the expected range of mark to input.
+        /// Prompts the user to re enter the mark for a student.
+        /// Calls the ValidateInput method to check input again.
+        /// </summary>
+        private void HandleError()
+        {
+            Console.WriteLine($" Enter a value in the range of {LowestMark} and" +
+                $" {HighestMark}!");
+
+            Console.Write($"\n Mark for { Students[studentIndex] } > ");
+
+            InputMark = Console.ReadLine();
+
+            ValidateInput();
         }
     }
 }
