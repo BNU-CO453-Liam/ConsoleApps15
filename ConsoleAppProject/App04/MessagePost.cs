@@ -14,12 +14,8 @@ namespace ConsoleAppProject.App04
     /// </author>
     public class MessagePost : Post
     {
-        
-
         // an arbitrarily long, multi-line message
         public String Message { get; }
-
-
 
         /// <summary>
         /// Constructor for objects of class MessagePost.
@@ -33,6 +29,13 @@ namespace ConsoleAppProject.App04
         public MessagePost(String author, String text) : base(author)
         {
             Message = text;
+        }
+
+        public override void Display()
+        {
+            Console.WriteLine($"    Message: {Message}");
+
+            base.Display();
         }
     }
 }
