@@ -1,41 +1,73 @@
-﻿using System;
+﻿using ConsoleAppProject.Helper;
+using System;
 using System.Collections.Generic;
-
+using System.Linq;
 
 namespace ConsoleAppProject.App04
 {
     ///<summary>
-    /// The NewsFeed class stores news posts for the news feed in a social network 
-    /// application.
-    /// 
-    /// Display of the posts is currently simulated by printing the details to the
-    /// terminal. (Later, this should display in a browser.)
-    /// 
-    /// This version does not save the data to disk, and it does not provide any
-    /// search or ordering functions.
+    ///This app is basically twitter.
     ///</summary>
     ///<author>
-    ///  Michael Kölling and David J. Barnes
-    ///  version 0.1
+    ///  Liam Smith
+    ///  version 0.2
     ///</author> 
-    public class NewsFeed
+    class NewsFeed
     {
-        private readonly List<Post> posts;
-        private const string AUTHOR = "Liam";
+        public List<Post> Posts;
+
+        public List<int> Likes;
+
+        public string Author;
+
+        public string AuthorSearch;
+
+        public bool ExitLoop = false;
+
+        public bool noPosts = false;
+
+        public static int VisiblePost { get; set; }
+
+        public int VisiblePostIndex { get; set; }
+
+        public static string redAlert;
+
+        public static string blueAlert { get; set; }
 
         ///<summary>
-        /// Construct an empty news feed.
+        /// Construct an empty news feed with an empty list of
+        /// posts and likes.
         ///</summary>
         public NewsFeed()
         {
-            posts = new List<Post>();
-            MessagePost post = new MessagePost(AUTHOR, "I wrote this");
-            AddMessagePost(post);
+            Posts = new List<Post>();
 
-            PhotoPost photopost = new PhotoPost(AUTHOR, "Photo.jpg", "Cool Photo");
+            Likes = new List<int>();
+
+            //MessagePost post = new MessagePost("jess", "constructed1");
+            //AddMessagePost(post);
+
+            //MessagePost post2 = new MessagePost("joe", "constructed2");
+            //AddMessagePost(post2);
+
+            //MessagePost post3 = new MessagePost("jason", "constructed3");
+            //AddMessagePost(post3);
+
+            //MessagePost post4 = new MessagePost("jim", "constructed1");
+            //AddMessagePost(post4);
+
+            //MessagePost post5 = new MessagePost("jim", "constructed22");
+            //AddMessagePost(post5);
+
+            PhotoPost photopost = new PhotoPost("jako", "Photo1.jpg", "wow");
             AddPhotoPost(photopost);
-        }
 
+            PhotoPost photopost2 = new PhotoPost("jaki", "Photo2.jpg", "great");
+            AddPhotoPost(photopost2);
+
+            PhotoPost photopost3 = new PhotoPost("jako", "Photo3.jpg", "fun");
+            AddPhotoPost(photopost3);
+        }
 
         ///<summary>
         /// Add a text post to the news feed.
@@ -43,8 +75,8 @@ namespace ConsoleAppProject.App04
         /// @param text  The text post to be added.
         ///</summary>
         public void AddMessagePost(MessagePost message)
-        {
-            posts.Add(message);
+        {          
+                Posts.Add(message);           
         }
 
         ///<summary>
@@ -54,22 +86,335 @@ namespace ConsoleAppProject.App04
         ///</summary>
         public void AddPhotoPost(PhotoPost photo)
         {
-            posts.Add(photo);
+            Posts.Add(photo);
         }
 
         ///<summary>
         /// Show the news feed. Currently: print the news feed details to the
-        /// terminal. (To do: replace this later with display in web browser.)
+        /// terminal.
         ///</summary>
         public void Display()
         {
-            // display all text posts
-            foreach (Post post in posts)
+            if (Posts.Count == 0)
             {
-                post.Display();
-                Console.WriteLine();   // empty line between posts
+                blueAlert = "\n    -- No posts to display --\n";
+
+                Console.Clear();
+            }
+
+            else
+            {
+                LoopDisplay();
             }
         }
-    }
 
+        /// <summary>
+        /// Displays a menu of options after each post
+        /// until the user exits the loop.
+        /// </summary>
+        public void LoopDisplay()
+        {
+            if (Posts.Count == 0)
+            {
+                VisiblePostIndex = 0;
+            }
+
+            else
+            {
+                for (VisiblePostIndex = 0; VisiblePostIndex <= Posts.Count; VisiblePostIndex++)
+                {
+                    ExitLoop = false;
+
+                    Console.Clear();
+
+                    RepeatFinalPost();
+
+                    if (VisiblePost < Posts.Count - 1)
+                    {
+                        ShowPost();
+                    }
+
+                    ConsoleHelper.Red();
+
+                    Console.Write(redAlert);
+
+                    ConsoleHelper.White();
+
+                    ConsoleHelper.Cyan();
+
+                    Console.Write(blueAlert);
+
+                    ConsoleHelper.White();
+
+                    redAlert = "";
+
+                    blueAlert = "";
+
+                    Console.WriteLine();
+
+                    string[] choices = new string[]
+                    {
+                    " [1] Like ", "  [3] Remove this post","  [5] Comment \n",
+                    " [2] Unlike ","[4] Remove all posts ", " [6] Next post ", "[7] Main Menu"
+                    };
+
+                    int choice = ConsoleHelper.SelectChoice2(choices);
+
+                    switch (choice)
+                    {
+                        case 1:
+                            LikePost(Posts[VisiblePostIndex]);
+
+                            VisiblePostIndex--;
+
+                            break;
+
+                        case 2:
+                            UnlikePost(Posts[VisiblePostIndex]);
+
+                            VisiblePostIndex--;
+
+                            break;
+
+                        case 3:
+                            RemovePost();
+
+                            VisiblePostIndex--;
+
+                            break;
+
+                        case 4:
+                            RemoveAllPosts();
+
+                            break;
+
+                        case 5:
+                            AddComment(Posts[VisiblePostIndex]);
+
+                            VisiblePostIndex--;
+
+                            break;
+
+                        case 6:
+                            if (VisiblePostIndex < Posts.Count -1)
+                            {                              
+                                VisiblePost++;
+                            }
+                            else
+                            {
+                                VisiblePostIndex--;
+
+                                blueAlert = "    -- No more posts to display ! --\n";
+                            }
+
+                            break;
+
+                        case 7:
+                            Console.Clear();
+
+                            ExitLoop = true;
+
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    if (ExitLoop && noPosts)
+                    {
+                        VisiblePost = 0;
+
+                        VisiblePostIndex = 0;
+
+                        blueAlert = "\n    -- All posts removed --\n";
+
+                        Console.WriteLine();
+
+                        break;
+                    }
+
+                    else
+
+                    {
+                        if (ExitLoop)
+                        {
+                            VisiblePost = 0;
+
+                            VisiblePostIndex = 0;
+                            
+                            Console.WriteLine();
+
+                            break;
+                        }
+                    }               
+                }
+            }
+        }
+
+        /// <summary>
+        /// Shows a post in the standard format.
+        /// </summary>
+        private void ShowPost()
+        {
+            ConsoleHelper.Cyan();
+
+            Console.WriteLine($"\n    -- Showing {VisiblePost + 1}/{Posts.Count} posts --");
+
+            ConsoleHelper.White();
+
+            Posts[VisiblePostIndex].Display();
+        }
+
+        /// <summary>
+        /// Repeats the display of the final post in the list.
+        /// </summary>
+        private void RepeatFinalPost()
+        {
+            if (VisiblePostIndex == Posts.Count - 1)
+            {
+                VisiblePost = Posts.Count - 1;
+
+                VisiblePostIndex = VisiblePost - 1;
+
+                ShowLastPost();
+
+                VisiblePostIndex++;
+            }
+        }
+
+        /// <summary>
+        /// Shows last post with specific variable adjustments.
+        /// </summary>
+        private void ShowLastPost()
+        {
+            ConsoleHelper.Cyan();
+
+            Console.WriteLine($"\n    -- Showing {VisiblePost + 1}/{Posts.Count} posts --");
+
+            ConsoleHelper.White();
+
+            Posts[VisiblePost].Display();
+        }
+
+        /// <summary>
+        /// Add a comment to a post.
+        /// </summary>
+        public static void AddComment(Post post)
+        {
+            Console.Write("\n    Enter comment > ");
+
+            string text = Console.ReadLine();
+
+            post.AddComment(text);
+
+            //ConsoleHelper.Cyan();
+
+            blueAlert = "\n    -- Comment added --\n";
+
+            //ConsoleHelper.White();
+        }
+
+        /// <summary>
+        /// Like a post if the user is not the author of the post,
+        /// or if they have already liked the post.
+        /// </summary>
+        private void LikePost(Post post)
+        {
+            if (Posts[VisiblePostIndex].Username == NetworkApp.Author)
+            {
+                redAlert = "    -- You cannot like your own posts --\n";
+            }
+
+            else
+            {
+                if (!Likes.Contains(VisiblePostIndex))
+                {
+                    post.Like();
+
+                    blueAlert = "    -- You liked this post --\n";
+
+                    Likes.Add(VisiblePostIndex);
+                }
+
+                else
+                {
+                    redAlert = "    -- You have already liked this post --\n";
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// Unlike a post unless the user is the author of the post.
+        /// </summary>
+        private void UnlikePost(Post post)
+        {
+            if (Posts[VisiblePostIndex].Username == NetworkApp.Author)
+            {
+                redAlert = "    -- You cannot like your own posts --\n";
+            }
+
+            else
+            {
+                if (Likes.Contains(VisiblePostIndex))
+                {
+                    post.Unlike();
+
+                    blueAlert = "    -- You unliked this post --\n";
+
+                    int like = Likes.FindIndex(x => x==VisiblePostIndex);
+
+                    Likes.RemoveAt(like);
+                }
+
+                else
+                {
+                    redAlert = "    -- You have not liked this post yet --\n";
+                }
+            }  
+        }
+
+        /// <summary>
+        /// Removes all posts regardless of the post author
+        /// to demonstrate admin priveleges.
+        /// </summary>
+        private void RemoveAllPosts()
+        {
+            Posts = new List<Post>();
+
+            blueAlert = "    -- All posts removed --\n";
+
+            Console.Clear();
+
+            ExitLoop = true;
+
+            VisiblePost = 0;
+        }
+
+        /// <summary>
+        /// Removes a post if the user is the author of the post.
+        /// </summary>
+        private void RemovePost()
+        {
+            if (Posts[VisiblePostIndex].Username == NetworkApp.Author)
+            {
+                Posts.RemoveAt(VisiblePostIndex);
+
+                redAlert = "    -- Post removed --\n";
+            }
+
+            else
+            {
+                if (Posts.Count == 1)
+                {
+                    RemoveAllPosts();
+                }
+
+                else
+                {
+                    redAlert = "    -- Only the author can remove this post --\n";
+                }
+            }          
+        }
+    }
 }

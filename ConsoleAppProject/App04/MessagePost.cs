@@ -31,8 +31,12 @@ namespace ConsoleAppProject.App04
             Message = text;
         }
 
+        /// <summary>
+        /// Displays the message of a post.
+        /// </summary>
         public override void Display()
         {
+            Console.WriteLine("\n ------------------------------");
             Console.WriteLine($"    Message: {Message}");
 
             base.Display();

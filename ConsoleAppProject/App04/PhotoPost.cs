@@ -41,8 +41,12 @@ namespace ConsoleAppProject.App04
             this.Caption = caption;
         }
 
+        /// <summary>
+        /// Displays the attributes of a photopost.
+        /// </summary>
         public override void Display()
         {
+            Console.WriteLine("\n ------------------------------");
             Console.WriteLine($"    Filename: {Filename}");
             Console.WriteLine($"    Caption: {Caption}");
 

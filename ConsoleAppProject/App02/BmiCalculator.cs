@@ -333,6 +333,8 @@ namespace ConsoleAppProject.App02
             }
 
             return message.ToString();
+            string msg = message.ToString();
+            Console.WriteLine($" {msg} ");
         }
 
         /// <summary>
@@ -402,7 +404,7 @@ namespace ConsoleAppProject.App02
 
             else if (BmiResult >= 13.8 && BmiResult <= 17.8)
             {
-                message.Append($" Child'sBMI is {BmiResult}. " +
+                message.Append($" Child's BMI is {BmiResult}. " +
                     $" Child is in the healthy range");
             }
 

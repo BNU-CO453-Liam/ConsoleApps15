@@ -47,8 +47,45 @@ namespace ConsoleAppProject.Helper
             foreach (string choice in choices)
             {
                 choiceNo++;
+                ConsoleHelper.White();
                 Console.WriteLine($"    {choiceNo}.  {choice}");
             }
+
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// same as above without integer
+        /// </summary>
+        public static int SelectChoice2(string[] choices)
+        {
+            // Display all the choices
+
+            DisplayChoices2(choices);
+
+            // Get the user's choice
+
+            int choiceNo = (int)InputNumber("\n Please enter your choice > ",
+                                            1, choices.Length);
+            return choiceNo;
+        }
+
+        /// <summary>
+        /// Same as above without starting digit
+        /// </summary>
+        private static void DisplayChoices2(string[] choices)
+        {
+            int choiceNo = 0;
+
+            foreach (string choice in choices)
+            {
+                choiceNo++;
+                ConsoleHelper.Yellow();
+                Console.Write($"{choice}");
+            }
+
+            Console.WriteLine();
+            ConsoleHelper.White();
         }
 
 
@@ -82,7 +119,6 @@ namespace ConsoleAppProject.Helper
 
             return number;
         }
-
 
         /// <summary>
         /// This method will prompt the user to enter a number
@@ -151,6 +187,31 @@ namespace ConsoleAppProject.Helper
 
             Console.WriteLine("\n");
             Console.ResetColor();
+        }
+
+        public static void Red()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+        }
+
+        public static void Yellow()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+        }
+
+        public static void Green()
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+        }
+
+        public static void Cyan()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+        }
+
+        public static void White()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

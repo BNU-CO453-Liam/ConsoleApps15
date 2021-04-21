@@ -10,19 +10,20 @@ namespace ConsoleAppProject.App04
 
         private readonly List<String> comments;
 
-
         // username of the post's author
-        public String Username { get; }
+        public String Username { get; set; }
 
         public DateTime Timestamp { get; }
 
         public Post(string author)
         {
             this.Username = author;
-            Timestamp = DateTime.Now;
-            likes = 0;
-            comments = new List<String>();
 
+            Timestamp = DateTime.Now;
+
+            likes = 0;
+
+            comments = new List<String>();
         }
 
         /// <summary>
@@ -99,7 +100,7 @@ namespace ConsoleAppProject.App04
 
             if (likes > 0)
             {
-                Console.WriteLine($"    Likes:  {likes}  people like this.");
+                Console.WriteLine($"    Likes:  {likes}  people like this.\n");
             }
             else
             {
@@ -112,9 +113,29 @@ namespace ConsoleAppProject.App04
             }
             else
             {
-                Console.WriteLine($"    {comments.Count}  comment(s). Click here to view.");
+                Console.WriteLine($"    {comments.Count} Comments:");
+
+                ShowComments();
+
+                Console.WriteLine();
             }
+
+            Console.WriteLine(" ------------------------------\n");
         }
 
+        /// <summary>
+        /// Displays the comments in a list.
+        /// </summary>
+        private void ShowComments()
+        {
+            for (int i = 0; i < comments.Count; i++)
+            {
+                Console.Write("        \"");
+
+                Console.Write(comments[i]);
+
+                Console.Write("\"\n");
+            }
+        }
     }
 }
