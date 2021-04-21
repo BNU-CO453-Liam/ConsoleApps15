@@ -14,6 +14,8 @@ namespace ConsoleAppProject.App04
     ///</author> 
     class NewsFeed
     {
+        public const string EmptyString = "";
+
         public List<Post> Posts;
 
         public List<int> Likes;
@@ -22,17 +24,17 @@ namespace ConsoleAppProject.App04
 
         public string AuthorSearch;
 
+        public static string RedAlert;
+
+        public static string BlueAlert { get; set; }
+
         public bool ExitLoop = false;
 
-        public bool noPosts = false;
+        public bool NoPosts = false;
 
         public static int VisiblePost { get; set; }
 
         public int VisiblePostIndex { get; set; }
-
-        public static string redAlert;
-
-        public static string blueAlert { get; set; }
 
         ///<summary>
         /// Construct an empty news feed with an empty list of
@@ -97,7 +99,7 @@ namespace ConsoleAppProject.App04
         {
             if (Posts.Count == 0)
             {
-                blueAlert = "\n    -- No posts to display --\n";
+                BlueAlert = "\n    -- No posts to display --\n";
 
                 Console.Clear();
             }
@@ -134,28 +136,19 @@ namespace ConsoleAppProject.App04
                         ShowPost();
                     }
 
-                    ConsoleHelper.Red();
+                    ShowRedAlert();
 
-                    Console.Write(redAlert);
+                    ShowBlueAlert();
 
-                    ConsoleHelper.White();
-
-                    ConsoleHelper.Cyan();
-
-                    Console.Write(blueAlert);
-
-                    ConsoleHelper.White();
-
-                    redAlert = "";
-
-                    blueAlert = "";
+                    ResetAlertValues();
 
                     Console.WriteLine();
 
                     string[] choices = new string[]
                     {
                     " [1] Like ", "  [3] Remove this post","  [5] Comment \n",
-                    " [2] Unlike ","[4] Remove all posts ", " [6] Next post ", "[7] Main Menu"
+                    " [2] Unlike ","[4] Remove all posts ", " [6] Next post ",
+                    "[7] Main Menu"
                     };
 
                     int choice = ConsoleHelper.SelectChoice2(choices);
@@ -196,16 +189,7 @@ namespace ConsoleAppProject.App04
                             break;
 
                         case 6:
-                            if (VisiblePostIndex < Posts.Count -1)
-                            {                              
-                                VisiblePost++;
-                            }
-                            else
-                            {
-                                VisiblePostIndex--;
-
-                                blueAlert = "    -- No more posts to display ! --\n";
-                            }
+                            ShowNextPost();
 
                             break;
 
@@ -220,13 +204,11 @@ namespace ConsoleAppProject.App04
                             break;
                     }
 
-                    if (ExitLoop && noPosts)
+                    if (ExitLoop && NoPosts)
                     {
                         VisiblePost = 0;
 
-                        VisiblePostIndex = 0;
-
-                        blueAlert = "\n    -- All posts removed --\n";
+                        BlueAlert = "\n    -- All posts removed --\n";
 
                         Console.WriteLine();
 
@@ -240,14 +222,64 @@ namespace ConsoleAppProject.App04
                         {
                             VisiblePost = 0;
 
-                            VisiblePostIndex = 0;
-                            
+                            //BlueAlert = "\n       // Main Menu \\\\\n" +
+                            //    "          ---------\n";
+
                             Console.WriteLine();
 
                             break;
                         }
-                    }               
+                    }
                 }
+            }
+        }
+
+        // Resets alerts to empty string for next use.
+        private static void ResetAlertValues()
+        {
+            RedAlert = EmptyString;
+
+            BlueAlert = EmptyString;
+        }
+
+        /// <summary>
+        /// Disaplays a blue alert message.
+        /// </summary>
+        private static void ShowBlueAlert()
+        {
+            ConsoleHelper.Cyan();
+
+            Console.Write(BlueAlert);
+
+            ConsoleHelper.White();
+        }
+
+        /// <summary>
+        /// Displays a red alert message;
+        /// </summary>
+        private static void ShowRedAlert()
+        {
+            ConsoleHelper.Red();
+
+            Console.Write(RedAlert);
+
+            ConsoleHelper.White();
+        }
+
+        /// <summary>
+        /// Displays the next post unless it is the last post.
+        /// </summary>
+        private void ShowNextPost()
+        {
+            if (VisiblePostIndex < Posts.Count - 1)
+            {
+                VisiblePost++;
+            }
+            else
+            {
+                VisiblePostIndex--;
+
+                BlueAlert = "    -- No more posts to display ! --\n";
             }
         }
 
@@ -258,7 +290,8 @@ namespace ConsoleAppProject.App04
         {
             ConsoleHelper.Cyan();
 
-            Console.WriteLine($"\n    -- Showing {VisiblePost + 1}/{Posts.Count} posts --");
+            Console.WriteLine($"\n    -- Showing {VisiblePost + 1}/" +
+                $"{Posts.Count} posts --");
 
             ConsoleHelper.White();
 
@@ -289,7 +322,8 @@ namespace ConsoleAppProject.App04
         {
             ConsoleHelper.Cyan();
 
-            Console.WriteLine($"\n    -- Showing {VisiblePost + 1}/{Posts.Count} posts --");
+            Console.WriteLine($"\n    -- Showing {VisiblePost + 1}/" +
+                $"{Posts.Count} posts --");
 
             ConsoleHelper.White();
 
@@ -297,7 +331,7 @@ namespace ConsoleAppProject.App04
         }
 
         /// <summary>
-        /// Add a comment to a post.
+        /// Promts the user to enter a comment and adds it to a post.
         /// </summary>
         public static void AddComment(Post post)
         {
@@ -307,11 +341,7 @@ namespace ConsoleAppProject.App04
 
             post.AddComment(text);
 
-            //ConsoleHelper.Cyan();
-
-            blueAlert = "\n    -- Comment added --\n";
-
-            //ConsoleHelper.White();
+            BlueAlert = "\n    -- Comment added --\n";
         }
 
         /// <summary>
@@ -322,7 +352,7 @@ namespace ConsoleAppProject.App04
         {
             if (Posts[VisiblePostIndex].Username == NetworkApp.Author)
             {
-                redAlert = "    -- You cannot like your own posts --\n";
+                RedAlert = "    -- You cannot like your own posts --\n";
             }
 
             else
@@ -331,27 +361,27 @@ namespace ConsoleAppProject.App04
                 {
                     post.Like();
 
-                    blueAlert = "    -- You liked this post --\n";
+                    BlueAlert = "    -- You liked this post --\n";
 
                     Likes.Add(VisiblePostIndex);
                 }
 
                 else
                 {
-                    redAlert = "    -- You have already liked this post --\n";
-
+                    RedAlert = "    -- You have already liked this post --\n";
                 }
             }
         }
 
         /// <summary>
-        /// Unlike a post unless the user is the author of the post.
+        /// Unlike a post unless the user is the author of the post or 
+        /// has not already liked the post.
         /// </summary>
         private void UnlikePost(Post post)
         {
             if (Posts[VisiblePostIndex].Username == NetworkApp.Author)
             {
-                redAlert = "    -- You cannot like your own posts --\n";
+                RedAlert = "    -- You cannot like your own posts --\n";
             }
 
             else
@@ -360,7 +390,7 @@ namespace ConsoleAppProject.App04
                 {
                     post.Unlike();
 
-                    blueAlert = "    -- You unliked this post --\n";
+                    BlueAlert = "    -- You unliked this post --\n";
 
                     int like = Likes.FindIndex(x => x==VisiblePostIndex);
 
@@ -369,7 +399,7 @@ namespace ConsoleAppProject.App04
 
                 else
                 {
-                    redAlert = "    -- You have not liked this post yet --\n";
+                    RedAlert = "    -- You have not liked this post yet --\n";
                 }
             }  
         }
@@ -382,13 +412,13 @@ namespace ConsoleAppProject.App04
         {
             Posts = new List<Post>();
 
-            blueAlert = "    -- All posts removed --\n";
+            BlueAlert = "    -- All posts removed --\n";
 
             Console.Clear();
 
             ExitLoop = true;
 
-            VisiblePost = 0;
+            //VisiblePost = 0;
         }
 
         /// <summary>
@@ -400,7 +430,7 @@ namespace ConsoleAppProject.App04
             {
                 Posts.RemoveAt(VisiblePostIndex);
 
-                redAlert = "    -- Post removed --\n";
+                RedAlert = "    -- Post removed --\n";
             }
 
             else
@@ -412,7 +442,7 @@ namespace ConsoleAppProject.App04
 
                 else
                 {
-                    redAlert = "    -- Only the author can remove this post --\n";
+                    RedAlert = "    -- Only the author can remove this post --\n";
                 }
             }          
         }

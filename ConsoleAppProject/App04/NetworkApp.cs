@@ -11,13 +11,11 @@ namespace ConsoleAppProject.App04
     {
         private NewsFeed news = new NewsFeed();
 
-        public static int PostIndex = -1;
-
         private int authorPosts;
 
-        public static int MaxLength = 150;
+        public const int MaxLength = 150;
 
-        public static int MinLength = 1;
+        public const int MinLength = 1;
 
         public static string Author { get; set; }
 
@@ -54,9 +52,14 @@ namespace ConsoleAppProject.App04
             {
                 ConsoleHelper.Cyan();
 
-                Console.WriteLine($"{blueAlert}");
+                Console.WriteLine($"{BlueAlert}");
 
-                blueAlert = "";
+                BlueAlert = "";
+
+                ConsoleHelper.Cyan();
+
+                Console.WriteLine("\n       // Main Menu \\\\\n" +
+                                "          ---------\n");
 
                 ConsoleHelper.Green();
 
@@ -67,8 +70,6 @@ namespace ConsoleAppProject.App04
                 int choice = ConsoleHelper.SelectChoice(choices);
 
                 postNow = false;
-
-                base.VisiblePostIndex = 0;
 
                 switch (choice)
                 {
@@ -119,11 +120,9 @@ namespace ConsoleAppProject.App04
 
             ConsoleHelper.Cyan();
 
-            blueAlert = "\n-- Your image has been posted ! --\n";
+            BlueAlert = "\n -- Your image has been posted ! --\n";
 
             ConsoleHelper.White();
-
-            PostIndex++;
 
             Console.Clear();
         }
@@ -199,11 +198,9 @@ namespace ConsoleAppProject.App04
 
                 Console.WriteLine();
 
-                blueAlert = "\n -- Your message has been posted ! --\n";
+                BlueAlert = "\n -- Your message has been posted ! --\n";
 
                 Console.Clear();
-
-                PostIndex++;
             }
 
             else
@@ -225,7 +222,7 @@ namespace ConsoleAppProject.App04
         {
             if (news.Posts.Count == 0)
             {
-                blueAlert = "\n    -- No posts to display --\n";
+                BlueAlert = "\n    -- No posts to display --\n";
 
                 Console.Clear();
             }
@@ -266,7 +263,7 @@ namespace ConsoleAppProject.App04
 
                             if (i == authorPosts)
                             {
-                                blueAlert = "    -- End of posts --\n";
+                                BlueAlert = "    -- End of posts --\n";
                             }   
                         }
                     }
@@ -274,7 +271,7 @@ namespace ConsoleAppProject.App04
 
                 else
                 {
-                    blueAlert = "\n    -- No posts found --\n";
+                    BlueAlert = "\n    -- No posts found --\n";
 
                     Console.Clear();
                 }
