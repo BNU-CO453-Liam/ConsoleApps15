@@ -1,23 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using ConsoleAppProject.Helper;
 
 namespace ConsoleAppProject.App04
 {
+    /// <summary>
+    /// This class inherits from the news feed class.
+    /// 
+    /// The user is able to login with their username,
+    /// post messages, post images, view posts, search for posts by
+    /// author, search for posts by date, logout or quit the app.
+    /// </summary>
     class NetworkApp : NewsFeed
     {
         private NewsFeed news = new NewsFeed();
 
-        private int authorPosts;
+        public int SearchPosts = 0;
 
-        public const int MaxLength = 150;
+        public const int MaxLength = 100;
 
         public const int MinLength = 1;
 
-        public static string Author { get; set; }
+        public static string CurrentUser { get; set; }
 
         private char input;
 
@@ -25,7 +30,9 @@ namespace ConsoleAppProject.App04
 
         private bool postNow = false;
 
-
+        /// <summary>
+        /// Display the main welcome menu.
+        /// </summary>
         public void DisplayMenu()
         {
             Console.Clear();
@@ -35,18 +42,13 @@ namespace ConsoleAppProject.App04
             string[] choices = new string[]
             {
                 "Post Message", "Post Image",
-                "Display All Posts", "Search posts", "Logout", "Quit"
+                "Display All Posts", "Display by Author", "Display by Date",
+                "Logout", "Quit"
             };
 
             bool wantToQuit = false;
 
-            Console.Write("\n Enter username > ");
-
-            Author = Console.ReadLine();
-
-            news.Author = Author;
-
-            Console.Clear();
+            Login();
 
             do
             {
@@ -63,7 +65,7 @@ namespace ConsoleAppProject.App04
 
                 ConsoleHelper.Green();
 
-                Console.WriteLine($"    -- Logged in as: {Author} --\n");
+                Console.WriteLine($"    -- Logged in as: {CurrentUser} --\n");
 
                 ConsoleHelper.White();
 
@@ -79,16 +81,33 @@ namespace ConsoleAppProject.App04
 
                     case 3: DisaplayAll(); break;
 
-                    case 4: DisplayPostsByAuthor(); break;
+                    case 4: DisplayByAuthor(); break;
 
-                    case 5: DisplayMenu(); break;
+                    case 5: DisplayByDate(); break;
 
-                    case 6: wantToQuit = true; break;
+                    case 6: DisplayMenu(); break;
+
+                    case 7: wantToQuit = true; break;
 
                     default: break;
                 }
 
             } while (!wantToQuit);
+        }
+
+        /// <summary>
+        /// Promts the user for their username.
+        /// (passwords have not been configured)
+        /// </summary>
+        private void Login()
+        {
+            Console.Write("\n Enter username > ");
+
+            CurrentUser = Console.ReadLine();
+
+            news.Author = CurrentUser;
+
+            Console.Clear();
         }
 
         /// <summary>
@@ -114,7 +133,7 @@ namespace ConsoleAppProject.App04
 
             string caption = Console.ReadLine();
 
-            PhotoPost photopost = new PhotoPost(Author, filename, caption);
+            PhotoPost photopost = new PhotoPost(CurrentUser, filename, caption);
 
             news.AddPhotoPost(photopost);
 
@@ -133,13 +152,16 @@ namespace ConsoleAppProject.App04
         /// </summary>
         private void PostDynamicMessage()
         {
-            ConsoleHelper.White();
+            ConsoleHelper.Red();
 
             Console.Clear();
 
+            Console.Write(RedAlert);
+
             ConsoleHelper.Cyan();
 
-            Console.WriteLine($"\n {MaxLength}/{MaxLength} characters remaining\n");
+            Console.WriteLine($"\n {MaxLength}/{MaxLength} characters " +
+                $"remaining\n");
 
             ConsoleHelper.White();
 
@@ -153,7 +175,8 @@ namespace ConsoleAppProject.App04
             {               
                 DetectUserInput();
 
-                if (Convert.ToChar(input) == Convert.ToChar(ConsoleKey.Backspace) && message.Length >= MinLength)
+                if (Convert.ToChar(input) == Convert.ToChar(ConsoleKey.Backspace) &&
+                    message.Length >= MinLength)
                 {
                     int lastChar = message.Length - 1;
 
@@ -164,16 +187,15 @@ namespace ConsoleAppProject.App04
 
                 else
                 {
-
                     if (Regex.IsMatch(input.ToString(), AllowedChars))
                     {
                         message += input.ToString();
                         remainingChars--;
                     }
-
                 }
 
-                if (Convert.ToChar(input) == Convert.ToChar(ConsoleKey.Enter) && message.Length >= MinLength)
+                if (Convert.ToChar(input) == Convert.ToChar(ConsoleKey.Enter) &&
+                    message.Length >= MinLength)
                 {
                     postNow = true; 
                 }
@@ -182,7 +204,8 @@ namespace ConsoleAppProject.App04
 
                 ConsoleHelper.Cyan();
 
-                Console.WriteLine($"\n {remainingChars}/{MaxLength} characters remaining\n");
+                Console.WriteLine($"\n {remainingChars}/{MaxLength} characters " +
+                    $"remaining\n");
 
                 ConsoleHelper.White();
 
@@ -192,7 +215,7 @@ namespace ConsoleAppProject.App04
 
             if (message.Length <= MaxLength)
             {
-                MessagePost post = new MessagePost(Author, message);
+                MessagePost post = new MessagePost(CurrentUser, message);
 
                 news.AddMessagePost(post);
 
@@ -207,7 +230,10 @@ namespace ConsoleAppProject.App04
             {
                 ConsoleHelper.Red();
 
-                Console.WriteLine($"\n -- Message must be {MaxLength} characters or less --\n");
+                RedAlert = $"\n -- Message must be {MaxLength} characters " +
+                    $"or less --\n";
+
+                postNow = false;
 
                 ConsoleHelper.White();
 
@@ -218,7 +244,7 @@ namespace ConsoleAppProject.App04
         /// <summary>
         /// Displays all posts by a selected author.
         /// </summary>
-        private void DisplayPostsByAuthor()
+        private void DisplayByAuthor()
         {
             if (news.Posts.Count == 0)
             {
@@ -231,40 +257,29 @@ namespace ConsoleAppProject.App04
             {
                 Console.Write("\n Enter author name > ");
 
-                AuthorSearch = Console.ReadLine();
+                Search = Console.ReadLine();
 
-                authorPosts = 0;
+                SearchPosts = 0;
 
                 foreach (Post post in news.Posts.ToList())
                 {
-                    if (post.Username.ToString() == AuthorSearch)
+                    if (post.Username.ToString() == Search)
                     {
-                        authorPosts++;
+                        SearchPosts++;
                     }
                 }
 
-                if (authorPosts > 0)
+                if (SearchPosts > 0)
                 {
                     int i = 0;
 
                     foreach (Post post in news.Posts.ToList())
                     {
-                        if (post.Username.ToString() == AuthorSearch)
+                        if (post.Username.ToString() == Search)
                         {
                             i++;
 
-                            ConsoleHelper.Cyan();
-
-                            Console.WriteLine($"\n -- Showing {i}/{authorPosts} posts by { AuthorSearch } --");
-
-                            ConsoleHelper.White();
-
-                            post.Display();
-
-                            if (i == authorPosts)
-                            {
-                                BlueAlert = "    -- End of posts --\n";
-                            }   
+                            DisplayResults(i, post);
                         }
                     }
                 }
@@ -279,6 +294,26 @@ namespace ConsoleAppProject.App04
         }
 
         /// <summary>
+        /// Display search results for posts by author or date.
+        /// </summary>
+        private void DisplayResults(int i, Post post)
+        {
+            ConsoleHelper.Cyan();
+
+            Console.WriteLine($"\n -- Showing {i}/{SearchPosts} posts by" +
+                $" {Search} --");
+
+            ConsoleHelper.White();
+
+            post.Display();
+
+            if (i == SearchPosts)
+            {
+                BlueAlert = "    -- End of posts --\n";
+            }
+        }
+
+        /// <summary>
         /// Detects which key the user has pressed.
         /// </summary>
         public char DetectUserInput()
@@ -286,6 +321,58 @@ namespace ConsoleAppProject.App04
             input = Console.ReadKey().KeyChar;
 
             return input;
+        }
+
+        /// <summary>
+        /// Display posts by date.
+        /// </summary>
+        private void DisplayByDate()
+        {
+            if (news.Posts.Count == 0)
+            {
+                BlueAlert = "\n    -- No posts to display --\n";
+
+                Console.Clear();
+            }
+
+            else
+            {
+                Console.Write("\n Enter year > ");
+
+                Search = Console.ReadLine();
+
+                SearchPosts = 0;
+
+                foreach (Post post in news.Posts.ToList())
+                {
+                    if (post.Timestamp.Date.Year.ToString() == Search)
+                    {
+                        SearchPosts++;
+                    }
+                }
+
+                if (SearchPosts > 0)
+                {
+                    int i = 0;
+
+                    foreach (Post post in news.Posts.ToList())
+                    {
+                        if (post.Timestamp.Date.Year.ToString() == Search)
+                        {
+                            i++;
+
+                            DisplayResults(i, post);
+                        }
+                    }
+                }
+
+                else
+                {
+                    BlueAlert = "\n    -- No posts found --\n";
+
+                    Console.Clear();
+                }
+            }
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ConsoleAppProject.App04
 {
+    /// <summary>
+    /// This class defines attributes for a post.
+    /// </summary>
     public class Post
     {
         private int likes;

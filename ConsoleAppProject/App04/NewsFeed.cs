@@ -1,16 +1,21 @@
 ﻿using ConsoleAppProject.Helper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace ConsoleAppProject.App04
 {
     ///<summary>
-    ///This app is basically twitter.
+    ///This app is a console based social media platform.
+    ///
+    ///This class allows the user to view the news feed.
+    ///
+    ///From here the user can like posts, unlike posts
+    ///remove a post, remove all posts, add acomment to a post,
+    ///view the next post or exit to the main menu.
     ///</summary>
     ///<author>
-    ///  Liam Smith
-    ///  version 0.2
+    ///Liam Smith
+    ///version 0.3
     ///</author> 
     class NewsFeed
     {
@@ -22,7 +27,7 @@ namespace ConsoleAppProject.App04
 
         public string Author;
 
-        public string AuthorSearch;
+        public string Search;
 
         public static string RedAlert;
 
@@ -45,30 +50,6 @@ namespace ConsoleAppProject.App04
             Posts = new List<Post>();
 
             Likes = new List<int>();
-
-            //MessagePost post = new MessagePost("jess", "constructed1");
-            //AddMessagePost(post);
-
-            //MessagePost post2 = new MessagePost("joe", "constructed2");
-            //AddMessagePost(post2);
-
-            //MessagePost post3 = new MessagePost("jason", "constructed3");
-            //AddMessagePost(post3);
-
-            //MessagePost post4 = new MessagePost("jim", "constructed1");
-            //AddMessagePost(post4);
-
-            //MessagePost post5 = new MessagePost("jim", "constructed22");
-            //AddMessagePost(post5);
-
-            PhotoPost photopost = new PhotoPost("jako", "Photo1.jpg", "wow");
-            AddPhotoPost(photopost);
-
-            PhotoPost photopost2 = new PhotoPost("jaki", "Photo2.jpg", "great");
-            AddPhotoPost(photopost2);
-
-            PhotoPost photopost3 = new PhotoPost("jako", "Photo3.jpg", "fun");
-            AddPhotoPost(photopost3);
         }
 
         ///<summary>
@@ -222,9 +203,6 @@ namespace ConsoleAppProject.App04
                         {
                             VisiblePost = 0;
 
-                            //BlueAlert = "\n       // Main Menu \\\\\n" +
-                            //    "          ---------\n";
-
                             Console.WriteLine();
 
                             break;
@@ -350,7 +328,7 @@ namespace ConsoleAppProject.App04
         /// </summary>
         private void LikePost(Post post)
         {
-            if (Posts[VisiblePostIndex].Username == NetworkApp.Author)
+            if (Posts[VisiblePostIndex].Username == NetworkApp.CurrentUser)
             {
                 RedAlert = "    -- You cannot like your own posts --\n";
             }
@@ -379,7 +357,7 @@ namespace ConsoleAppProject.App04
         /// </summary>
         private void UnlikePost(Post post)
         {
-            if (Posts[VisiblePostIndex].Username == NetworkApp.Author)
+            if (Posts[VisiblePostIndex].Username == NetworkApp.CurrentUser)
             {
                 RedAlert = "    -- You cannot like your own posts --\n";
             }
@@ -417,8 +395,6 @@ namespace ConsoleAppProject.App04
             Console.Clear();
 
             ExitLoop = true;
-
-            //VisiblePost = 0;
         }
 
         /// <summary>
@@ -426,7 +402,7 @@ namespace ConsoleAppProject.App04
         /// </summary>
         private void RemovePost()
         {
-            if (Posts[VisiblePostIndex].Username == NetworkApp.Author)
+            if (Posts[VisiblePostIndex].Username == NetworkApp.CurrentUser)
             {
                 Posts.RemoveAt(VisiblePostIndex);
 

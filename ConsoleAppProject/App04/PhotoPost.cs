@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-
 
 namespace ConsoleAppProject.App04
 {
@@ -10,8 +8,8 @@ namespace ConsoleAppProject.App04
     /// Other data, such as author and time, are also stored.
     ///</summary>
     /// <author>
-    /// Michael Kölling and David J. Barnes
-    /// @version 0.1
+    /// Liam Smith
+    /// version 0.3
     /// </author>
     public class PhotoPost : Post
     {
