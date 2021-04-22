@@ -77,5 +77,33 @@ namespace ConsoleAppTests
             Assert.IsTrue(app04.Posts[0].likes == 0);
         }
 
+        [TestMethod]
+        public void AddComment()
+        {
+            MessagePost testMessagePost = new MessagePost(author, message);
+
+            testMessagePost.Message = message;
+
+            app04.AddMessagePost(testMessagePost);
+
+            app04.Posts[0].AddComment(comment);
+
+            Assert.IsTrue(app04.Posts[0].comments.Contains(comment));
+        }
+
+        [TestMethod]
+        public void RemovePost()
+        {
+            MessagePost testMessagePost = new MessagePost(author, message);
+
+            testMessagePost.Message = message;
+
+            app04.AddMessagePost(testMessagePost);
+
+            app04.Posts.RemoveAt(0);
+
+            Assert.IsTrue(app04.Posts.Count == 0);
+        }
+
     }
 }
