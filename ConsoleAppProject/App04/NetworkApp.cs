@@ -12,7 +12,7 @@ namespace ConsoleAppProject.App04
     /// post messages, post images, view posts, search for posts by
     /// author, search for posts by date, logout or quit the app.
     /// </summary>
-    class NetworkApp : NewsFeed
+    public class NetworkApp : NewsFeed
     {
         private NewsFeed news = new NewsFeed();
 

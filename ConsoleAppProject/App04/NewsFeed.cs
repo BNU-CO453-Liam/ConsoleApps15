@@ -17,7 +17,7 @@ namespace ConsoleAppProject.App04
     ///Liam Smith
     ///version 0.3
     ///</author> 
-    class NewsFeed
+    public class NewsFeed
     {
         public const string EmptyString = "";
 
