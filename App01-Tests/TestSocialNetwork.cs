@@ -105,5 +105,33 @@ namespace ConsoleAppTests
             Assert.IsTrue(app04.Posts.Count == 0);
         }
 
+        [TestMethod]
+        public void SearchPostsByDate()
+        {
+            MessagePost testMessagePost = new MessagePost(author, message);
+
+            testMessagePost.Message = message;
+
+            app04.news.AddMessagePost(testMessagePost);
+
+            app04.DisplayByDate("2021");
+
+            Assert.IsTrue(app04.SearchPosts > 0);
+        }
+
+        [TestMethod]
+        public void SearchPostsByAuthor()
+        {
+            MessagePost testMessagePost = new MessagePost(author, message);
+
+            testMessagePost.Message = message;
+
+            app04.news.AddMessagePost(testMessagePost);
+
+            app04.DisplayByAuthor(author);
+
+            Assert.IsTrue(app04.SearchPosts > 0);
+        }
+
     }
 }
