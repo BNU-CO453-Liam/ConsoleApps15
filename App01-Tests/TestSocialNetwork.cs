@@ -15,7 +15,6 @@ namespace ConsoleAppTests
         private string author = testString;
         private string caption = testString;
         private string fileName = testString;
-        //private string currentUser = testString;
         public string date = "2021";
 
         [TestMethod]
@@ -32,6 +31,7 @@ namespace ConsoleAppTests
             Assert.IsTrue(app04.Posts.Contains(testMessagePost));
         }
 
+
         [TestMethod]
         public void AddPhotoPost()
         {
@@ -46,6 +46,42 @@ namespace ConsoleAppTests
 
             Assert.IsTrue(app04.Posts.Contains(testPhotoPost));
         }
+
+        /// <summary>
+        /// Adds 10 message posts
+        /// Adds 10 photo posts
+        /// displays all posts
+        /// </summary>
+        [TestMethod]
+        public void DisplayAllPosts()
+        {
+
+            for (int i = 0; i < 10; i++)
+            {
+                MessagePost testMessagePost = new MessagePost(author, message);
+
+                testMessagePost.Message = message;
+
+                app04.news.AddMessagePost(testMessagePost);
+
+                PhotoPost testPhotoPost = new PhotoPost(author, fileName, caption);
+
+                testPhotoPost.Filename = fileName;
+                testPhotoPost.Caption = caption;
+
+                app04.news.AddPhotoPost(testPhotoPost);
+            }
+
+            app04.LoopDisplay();
+
+            for (int i = 0; i < app04.news.Posts.Count; i++)
+            {
+                app04.news.ShowNextPost();
+            }
+
+            Assert.IsTrue(app04.news.VisiblePost == 20);
+        }
+
 
         [TestMethod]
         public void LikePost()
@@ -106,7 +142,7 @@ namespace ConsoleAppTests
         }
 
         [TestMethod]
-        public void SearchPostsByDate()
+        public void DisplayPostsByDate()
         {
             MessagePost testMessagePost = new MessagePost(author, message);
 
@@ -120,7 +156,7 @@ namespace ConsoleAppTests
         }
 
         [TestMethod]
-        public void SearchPostsByAuthor()
+        public void DisplayPostsByUser()
         {
             MessagePost testMessagePost = new MessagePost(author, message);
 
