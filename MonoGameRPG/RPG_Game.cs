@@ -86,7 +86,7 @@ namespace MonoGameRPG
 
             //Vector2 position = new Vector2(0, 0);
 
-            // draw background image
+            // draw background image,
 
             spriteBatch.Draw(player.Image, player.Position, Color.White);
 
