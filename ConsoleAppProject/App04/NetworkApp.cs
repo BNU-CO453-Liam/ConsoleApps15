@@ -12,11 +12,11 @@ namespace ConsoleAppProject.App04
     /// post messages, post images, view posts, search for posts by
     /// author, search for posts by date, logout or quit the app.
     /// </summary>
-    class NetworkApp : NewsFeed
+    public class NetworkApp : NewsFeed
     {
-        private NewsFeed news = new NewsFeed();
+        public NewsFeed news = new NewsFeed();
 
-        public int SearchPosts = 0;
+        public int SearchPosts { get; set; }
 
         public const int MaxLength = 100;
 
@@ -83,7 +83,9 @@ namespace ConsoleAppProject.App04
 
                     case 4: DisplayByAuthor(); break;
 
-                    case 5: DisplayByDate(); break;
+                    case 5: Console.Write("\n Enter year > ");
+
+                    Search = Console.ReadLine(); DisplayByDate(Search); break;
 
                     case 6: DisplayMenu(); break;
 
@@ -107,13 +109,13 @@ namespace ConsoleAppProject.App04
 
             news.Author = CurrentUser;
 
-            Console.Clear();
+            //Console.Clear();
         }
 
         /// <summary>
         /// Displays all posts in the news feed.
         /// </summary>
-        private void DisaplayAll()
+        public void DisaplayAll()
         {
             news.Display();
         }
@@ -326,26 +328,26 @@ namespace ConsoleAppProject.App04
         /// <summary>
         /// Display posts by date.
         /// </summary>
-        private void DisplayByDate()
+        public void DisplayByDate(string date)
         {
             if (news.Posts.Count == 0)
             {
                 BlueAlert = "\n    -- No posts to display --\n";
 
-                Console.Clear();
+                //Console.Clear();
             }
 
             else
             {
-                Console.Write("\n Enter year > ");
+                //Console.Write("\n Enter year > ");
 
-                Search = Console.ReadLine();
+                //SearchFor = Console.ReadLine();
 
                 SearchPosts = 0;
 
                 foreach (Post post in news.Posts.ToList())
                 {
-                    if (post.Timestamp.Date.Year.ToString() == Search)
+                    if (post.Timestamp.Date.Year.ToString() == date)
                     {
                         SearchPosts++;
                     }
@@ -357,7 +359,7 @@ namespace ConsoleAppProject.App04
 
                     foreach (Post post in news.Posts.ToList())
                     {
-                        if (post.Timestamp.Date.Year.ToString() == Search)
+                        if (post.Timestamp.Date.Year.ToString() == date)
                         {
                             i++;
 

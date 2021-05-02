@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Tests", "App01-Tests\ConsoleApp.Tests.csproj", "{B7E4D189-DB1A-4B84-A7B5-574BB807355D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApps", "WebApps\WebApps.csproj", "{E1015419-09A9-407A-B084-BAF45EF9BEB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApps", "WebApps\WebApps.csproj", "{E1015419-09A9-407A-B084-BAF45EF9BEB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGameRPG", "MonoGameRPG\MonoGameRPG.csproj", "{60777895-6059-4E5F-8A86-97014CA4C41E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{E1015419-09A9-407A-B084-BAF45EF9BEB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1015419-09A9-407A-B084-BAF45EF9BEB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1015419-09A9-407A-B084-BAF45EF9BEB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60777895-6059-4E5F-8A86-97014CA4C41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60777895-6059-4E5F-8A86-97014CA4C41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60777895-6059-4E5F-8A86-97014CA4C41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60777895-6059-4E5F-8A86-97014CA4C41E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

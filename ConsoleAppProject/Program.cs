@@ -20,7 +20,7 @@ namespace ConsoleAppProject
     {
         //private static DistanceConverter converter = new DistanceConverter();
 
-        private static NetworkApp app04 = new NetworkApp();
+        //private static NetworkApp app04 = new NetworkApp();
 
         /// <summary>
         /// Displays a heading

@@ -17,23 +17,23 @@ namespace ConsoleAppProject.App04
     ///Liam Smith
     ///version 0.3
     ///</author> 
-    class NewsFeed
+    public class NewsFeed
     {
         public const string EmptyString = "";
 
-        public List<Post> Posts;
+        public List<Post> Posts { get; set; }
 
         public List<int> Likes;
 
         public string Author;
 
-        public string Search;
+        public string Search { get; set; }
 
         public static string RedAlert;
 
         public static string BlueAlert { get; set; }
 
-        public bool ExitLoop = false;
+        public bool ExitLoop { get; set; }
 
         public bool NoPosts = false;
 
@@ -108,7 +108,7 @@ namespace ConsoleAppProject.App04
                 {
                     ExitLoop = false;
 
-                    Console.Clear();
+                    //Console.Clear();
 
                     RepeatFinalPost();
 
