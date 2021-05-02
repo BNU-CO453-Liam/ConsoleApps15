@@ -8,9 +8,9 @@ namespace ConsoleAppProject.App04
     /// </summary>
     public class Post
     {
-        private int likes;
+        public int likes { get; set; }
 
-        private readonly List<String> comments;
+        public readonly List<String> comments;
 
         // username of the post's author
         public String Username { get; set; }

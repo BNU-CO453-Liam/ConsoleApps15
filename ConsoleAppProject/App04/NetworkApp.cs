@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using ConsoleAppProject.Helper;
+using System.Collections.Generic;
 
 namespace ConsoleAppProject.App04
 {
@@ -81,11 +82,23 @@ namespace ConsoleAppProject.App04
 
                     case 3: DisaplayAll(); break;
 
-                    case 4: DisplayByAuthor(); break;
+                    case 4:
+                        Console.Write("\n Enter author name > ");
 
-                    case 5: Console.Write("\n Enter year > ");
+                        Search = Console.ReadLine();
 
-                    Search = Console.ReadLine(); DisplayByDate(Search); break;
+                        DisplayByAuthor(Search);
+
+                        break;
+
+                    case 5:
+                        Console.Write("\n Enter year > ");
+
+                        Search = Console.ReadLine();
+
+                        DisplayByDate(Search); 
+                        
+                        break;
 
                     case 6: DisplayMenu(); break;
 
@@ -246,7 +259,7 @@ namespace ConsoleAppProject.App04
         /// <summary>
         /// Displays all posts by a selected author.
         /// </summary>
-        private void DisplayByAuthor()
+        public void DisplayByAuthor(String author)
         {
             if (news.Posts.Count == 0)
             {
@@ -257,15 +270,11 @@ namespace ConsoleAppProject.App04
 
             else
             {
-                Console.Write("\n Enter author name > ");
-
-                Search = Console.ReadLine();
-
                 SearchPosts = 0;
 
                 foreach (Post post in news.Posts.ToList())
                 {
-                    if (post.Username.ToString() == Search)
+                    if (post.Username.ToString() == author)
                     {
                         SearchPosts++;
                     }
@@ -277,7 +286,7 @@ namespace ConsoleAppProject.App04
 
                     foreach (Post post in news.Posts.ToList())
                     {
-                        if (post.Username.ToString() == Search)
+                        if (post.Username.ToString() == author)
                         {
                             i++;
 
@@ -302,8 +311,7 @@ namespace ConsoleAppProject.App04
         {
             ConsoleHelper.Cyan();
 
-            Console.WriteLine($"\n -- Showing {i}/{SearchPosts} posts by" +
-                $" {Search} --");
+            Console.WriteLine($"\n    -- Showing {i}/{SearchPosts} posts --");
 
             ConsoleHelper.White();
 
@@ -328,7 +336,7 @@ namespace ConsoleAppProject.App04
         /// <summary>
         /// Display posts by date.
         /// </summary>
-        public void DisplayByDate(string date)
+        public void DisplayByDate(String date)
         {
             if (news.Posts.Count == 0)
             {
@@ -339,15 +347,11 @@ namespace ConsoleAppProject.App04
 
             else
             {
-                //Console.Write("\n Enter year > ");
-
-                //SearchFor = Console.ReadLine();
-
                 SearchPosts = 0;
 
                 foreach (Post post in news.Posts.ToList())
                 {
-                    if (post.Timestamp.Date.Year.ToString() == date)
+                    if (post.Timestamp.Year.ToString() == date)
                     {
                         SearchPosts++;
                     }
@@ -359,10 +363,9 @@ namespace ConsoleAppProject.App04
 
                     foreach (Post post in news.Posts.ToList())
                     {
-                        if (post.Timestamp.Date.Year.ToString() == date)
+                        if (post.Timestamp.Year.ToString() == date)
                         {
                             i++;
-
                             DisplayResults(i, post);
                         }
                     }

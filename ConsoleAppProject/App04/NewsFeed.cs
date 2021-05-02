@@ -37,7 +37,7 @@ namespace ConsoleAppProject.App04
 
         public bool NoPosts = false;
 
-        public static int VisiblePost { get; set; }
+        public int VisiblePost { get; set; }
 
         public int VisiblePostIndex { get; set; }
 
@@ -247,7 +247,7 @@ namespace ConsoleAppProject.App04
         /// <summary>
         /// Displays the next post unless it is the last post.
         /// </summary>
-        private void ShowNextPost()
+        public void ShowNextPost()
         {
             if (VisiblePostIndex < Posts.Count - 1)
             {
