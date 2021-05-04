@@ -46,7 +46,7 @@ namespace MonoGameRPG
 
         public Sprite(int x, int y)
         {
-            Position = new Vector2(x, y);
+            //Position = new Vector2(0, 0);
             StartPosition = Position;
 
             MaxSpeed = 1000;

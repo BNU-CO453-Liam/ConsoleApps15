@@ -14,10 +14,10 @@ namespace MonoGameRPG
 
         // attributes/ vars
 
-        private GraphicsDeviceManager graphics;
+        public static GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
-        private Vector2 position;
+        //private Vector2 position;
 
 
         private Texture2D PlayerImage;
@@ -27,7 +27,7 @@ namespace MonoGameRPG
         private Texture2D walkRightImages;
         private Texture2D walkUpImages;
 
-        private PlayerSprite player;
+        public static PlayerSprite player;
 
 
         public RPG_Game()
@@ -64,7 +64,7 @@ namespace MonoGameRPG
 
         private void SetupSprites()
         {
-            player = new PlayerSprite(200, 300);
+            player = new PlayerSprite(0, 0);
             player.Image = PlayerImage;
         }
 
@@ -88,7 +88,19 @@ namespace MonoGameRPG
 
             // draw background image,
 
-            spriteBatch.Draw(player.Image, player.Position, Color.White);
+            //spriteBatch.Draw(player.Image, player.Position, Color.White);
+
+            spriteBatch.Draw(
+    player.Image,
+    player.Position,
+    null,
+    Color.White,
+    0f,
+    new Vector2(player.Image.Width, player.Image.Height),
+    Vector2.One,
+    SpriteEffects.None,
+    0f
+);
 
             spriteBatch.End();
 
